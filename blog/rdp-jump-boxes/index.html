@@ -5,14 +5,14 @@
     <meta name="description" content="Offensive Security Engineering &amp; Shenanigans">
     <meta name="Author" content="Rasta Mouse">
     <meta name="keywords" content="offensive security red team pentesting">
-    <link rel="stylesheet" href=https://rastamouse.me/css/syntax.css>
-    <link rel="stylesheet" href=https://rastamouse.me/css/style.css>
+    <link rel="stylesheet" href=/rastamouse.me-old_blog/css/syntax.css>
+    <link rel="stylesheet" href=/rastamouse.me-old_blog/css/style.css>
     <script src="https://kit.fontawesome.com/1b7478c139.js" crossorigin="anonymous"></script>
     <title>Cheesy Rumbles</title>
   </head><body><aside id="sidenav">
     <header>
     
-        <a href=https://rastamouse.me><img src="https://rastamouse.me/avatar.png" alt="avatar"></a>
+        <a href=https://rastamouse.me><img src="/rastamouse.me-old_blog/avatar.png" alt="avatar"></a>
         
     
 
@@ -26,7 +26,7 @@
     <nav>
         
             		
-            <a href="/"
+            <a href="/rastamouse.me-old_blog/"
                 
             >
                 <i class="fas fa-home fa-sm"></i>
@@ -34,7 +34,7 @@
             </a>
         
             		
-            <a href="/blog/"
+            <a href="/rastamouse.me-old_blog/blog/"
                 
             >
                 <i class="fas fa-keyboard fa-ms"></i>
@@ -42,7 +42,7 @@
             </a>
         
             		
-            <a href="/tags"
+            <a href="/rastamouse.me-old_blog/tags"
                 
             >
                 <i class="fas fa-tags fa-ms"></i>
@@ -70,7 +70,7 @@
             </a>
         
             		
-            <a href="/index.xml"
+            <a href="/rastamouse.me-old_blog/index.xml"
                 
             >
                 <i class="fas fa-rss fa-ms"></i>
@@ -101,7 +101,7 @@
 <p>This short post demonstrates how it may be possible to pivot into a segregated/protected network, via an RDP Jump Box.</p>
 <p>This is the network topology I&rsquo;ve built for the scenario:</p>
 <figure>
-    <img src="/images/rdp/network.jpg"/> 
+    <img src="/rastamouse.me-old_blog/images/rdp/network.jpg"/> 
 </figure>
 
 <p>A brief description:</p>
@@ -138,7 +138,7 @@ MemberDN     : CN=Rasta Mouse (Admin),CN=Users,DC=rasta-lan,DC=local
 <p>If the user has elected to save the RDP credentials, this is the most fun and elegent way if you have the necessary <code>SeDebugPrivilege</code> to carry it out.</p>
 <p>This is how Windows Credentials look in the Credential Manager GUI.</p>
 <figure>
-    <img src="/images/rdp/cred-manager.jpg"/> 
+    <img src="/rastamouse.me-old_blog/images/rdp/cred-manager.jpg"/> 
 </figure>
 
 <p>You can query the same on the command line.</p>
@@ -238,7 +238,7 @@ Decrypting Credential:
 </blockquote>
 <p>Now we RDP to our Teamserver&rsquo;s IP address, and we should land on that jump box&hellip;</p>
 <figure>
-    <img src="/images/rdp/rdp01.jpg"/> 
+    <img src="/rastamouse.me-old_blog/images/rdp/rdp01.jpg"/> 
 </figure>
 
 <h2 id="persistence">Persistence</h2>
@@ -266,7 +266,7 @@ Decrypting Credential:
 <div class="highlight"><pre class="chroma"><code class="language-text" data-lang="text">beacon&gt; link 10.0.0.100
 [+] established link to child beacon: 10.0.0.100
 </code></pre></div><figure>
-    <img src="/images/rdp/link.jpg"/> 
+    <img src="/rastamouse.me-old_blog/images/rdp/link.jpg"/> 
 </figure>
 
 <blockquote>
@@ -295,7 +295,7 @@ SECRET\rasta_mouse[tab]Passw0rd!
 </ul>
 <p>As before, RDP to the Teamsever IP and we&rsquo;ll land directly inside <code>SECRET</code>.</p>
 <figure>
-    <img src="/images/rdp/mo1.jpg"/> 
+    <img src="/rastamouse.me-old_blog/images/rdp/mo1.jpg"/> 
 </figure>
 
 <h2 id="conclusion">Conclusion</h2>
@@ -304,13 +304,13 @@ SECRET\rasta_mouse[tab]Passw0rd!
     <div class="nav-next-prev">
         <div class="nav-prev">
             
-                <a href="https://rastamouse.me/blog/terraform-pt1/"><i class="fas fa-chevron-left"></i></a>
+                <a href="/rastamouse.me-old_blog/blog/terraform-pt1/"><i class="fas fa-chevron-left"></i></a>
             
         </div>
         <a class="nav-top" href="#">top</i></a>
         <div class="nav-next">
             
-                <a href="https://rastamouse.me/blog/terraform-pt2/"><i class="fas fa-chevron-right"></i></a>
+                <a href="/rastamouse.me-old_blog/blog/terraform-pt2/"><i class="fas fa-chevron-right"></i></a>
             
         </div>
     </div>
@@ -325,5 +325,5 @@ SECRET\rasta_mouse[tab]Passw0rd!
 </div>
 </footer></main>
     </body>
-    <script src=https://rastamouse.me/js/navbutton.js></script>
+    <script src=/rastamouse.me-old_blog/js/navbutton.js></script>
 </html>

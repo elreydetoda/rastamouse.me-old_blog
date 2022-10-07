@@ -5,14 +5,14 @@
     <meta name="description" content="Offensive Security Engineering &amp; Shenanigans">
     <meta name="Author" content="Rasta Mouse">
     <meta name="keywords" content="offensive security red team pentesting">
-    <link rel="stylesheet" href=https://rastamouse.me/css/syntax.css>
-    <link rel="stylesheet" href=https://rastamouse.me/css/style.css>
+    <link rel="stylesheet" href=/rastamouse.me-old_blog/css/syntax.css>
+    <link rel="stylesheet" href=/rastamouse.me-old_blog/css/style.css>
     <script src="https://kit.fontawesome.com/1b7478c139.js" crossorigin="anonymous"></script>
     <title>Cheesy Rumbles</title>
   </head><body><aside id="sidenav">
     <header>
     
-        <a href=https://rastamouse.me><img src="https://rastamouse.me/avatar.png" alt="avatar"></a>
+        <a href=https://rastamouse.me><img src="/rastamouse.me-old_blog/avatar.png" alt="avatar"></a>
         
     
 
@@ -26,7 +26,7 @@
     <nav>
         
             		
-            <a href="/"
+            <a href="/rastamouse.me-old_blog/"
                 
             >
                 <i class="fas fa-home fa-sm"></i>
@@ -34,7 +34,7 @@
             </a>
         
             		
-            <a href="/blog/"
+            <a href="/rastamouse.me-old_blog/blog/"
                 
             >
                 <i class="fas fa-keyboard fa-ms"></i>
@@ -42,7 +42,7 @@
             </a>
         
             		
-            <a href="/tags"
+            <a href="/rastamouse.me-old_blog/tags"
                 
             >
                 <i class="fas fa-tags fa-ms"></i>
@@ -70,7 +70,7 @@
             </a>
         
             		
-            <a href="/index.xml"
+            <a href="/rastamouse.me-old_blog/index.xml"
                 
             >
                 <i class="fas fa-rss fa-ms"></i>
@@ -98,26 +98,26 @@
   </ul>
 </nav>
     <p>FortyNorth Security recently <a href="https://www.fortynorthsecurity.com/aggressive-msbuild-bypass-detection/">posted an article</a> detailing the process for leveraging MSBuild to execute unmanaged PowerShell, and automating it in Aggressor script for Cobalt Strike users.  Being a native binary in the Windows OS, the use of MSBuild is a <a href="https://lolbas-project.github.io/lolbas/Binaries/Msbuild/">common AWL bypass technique</a>, which is handy in relatively well locked down environments.</p>
-<p>I&rsquo;ve <a href="/2019/06/tikispawn-msbuild/">previously blogged</a> about how to combine MSBuild and TikiSpawn to execute a Cobalt Strike agent, circumventing AppLocker and Defender on Windows 10 1903.  Inspired by Forty North&rsquo;s Aggressor implemention I thought it would be fun to knock something similar up to leverage <a href="https://github.com/rasta-mouse/TikiTorch#tikispawn">TikiSpawn</a> for lateral movement via MSBuild and WMI, and this will hopefully mark the beginning of more Aggressor for common/popular TikiTorch use cases.</p>
+<p>I&rsquo;ve <a href="/rastamouse.me-old_blog/2019/06/tikispawn-msbuild/">previously blogged</a> about how to combine MSBuild and TikiSpawn to execute a Cobalt Strike agent, circumventing AppLocker and Defender on Windows 10 1903.  Inspired by Forty North&rsquo;s Aggressor implemention I thought it would be fun to knock something similar up to leverage <a href="https://github.com/rasta-mouse/TikiTorch#tikispawn">TikiSpawn</a> for lateral movement via MSBuild and WMI, and this will hopefully mark the beginning of more Aggressor for common/popular TikiTorch use cases.</p>
 <p>tl;dr - <a href="https://github.com/rasta-mouse/TikiTorch/tree/master/Aggressor">code here</a>.</p>
 <h3 id="tikispawn--tikiloader-mods">TikiSpawn &amp; TikiLoader Mods</h3>
 <p>When executing commands remotely via WMI and WinRM, they are done so as children of the <code>WMI Provider Host</code> and <code>Host process for WinRM plug-ins</code> respectively.  <code>LAB\Administrator</code> is logged in interactively and has a session ID of <code>1</code>, as seen by <code>explorer.exe</code> and other processes.  If WMI or WinRM is used remotely with the same credentials, code exec still occurs in session <code>0</code>.</p>
 <figure>
-    <img src="/images/aggressor/session-ids.png"/> 
+    <img src="/rastamouse.me-old_blog/images/aggressor/session-ids.png"/> 
 </figure>
 
 <p>This has a number of consequences - the most significant of which for this article is the PPID spoofing within <a href="https://github.com/rasta-mouse/TikiTorch/blob/master/TikiLoader/Loader.cs#L150-L165">TikiLoader</a>.  By default, when TikiSpawn runs it <a href="https://github.com/rasta-mouse/TikiTorch/blob/master/TikiSpawn/Program.cs#L29-L37">looks</a> for the binary specified as the desired parent, checks to see if that process is within the current Session ID and returns its PID.  Of course in this situation, we won&rsquo;t find a process such as Explorer in session 0 which will cause TikiSpawn to <a href="https://github.com/rasta-mouse/TikiTorch/blob/master/TikiSpawn/Program.cs#L48-L52">exit</a>.</p>
 <p>I did experiment with PPID&rsquo;ing a process in session 0 to a process in a different session, but it didn&rsquo;t seem to work so well. So instead, I introduced a new <a href="https://github.com/rasta-mouse/TikiTorch/blob/master/TikiLoader/Loader.cs#L178-L198">function</a> in TikiLoader to create a new process without attempting to PPID.</p>
 <p>This creates a new stripped-down version of TikiSpawn like so:</p>
 <figure>
-    <img src="/images/aggressor/tikispawn.png"/> 
+    <img src="/rastamouse.me-old_blog/images/aggressor/tikispawn.png"/> 
 </figure>
 
 <p>Passing the binary and encoded shellcode in as arguments will allow us to specify them on-the-fly.  This is especially useful when we come to the Aggressor, since we can generate shellcode dynamically depending on which listener we choose.</p>
 <h3 id="dynamic-xml">Dynamic XML</h3>
 <p>As with my previous post, I&rsquo;m working from an XML template that has placeholders for the content we want to shove into it at runtime.</p>
 <figure>
-    <img src="/images/aggressor/xml-template.png"/> 
+    <img src="/rastamouse.me-old_blog/images/aggressor/xml-template.png"/> 
 </figure>
 
 <p>Aggressor has the ability to read in data from a file on disk as an array, then remove/add any index in that array.  So in the case of shellcode, we:</p>
@@ -134,13 +134,13 @@
     <div class="nav-next-prev">
         <div class="nav-prev">
             
-                <a href="https://rastamouse.me/blog/tikivader/"><i class="fas fa-chevron-left"></i></a>
+                <a href="/rastamouse.me-old_blog/blog/tikivader/"><i class="fas fa-chevron-left"></i></a>
             
         </div>
         <a class="nav-top" href="#">top</i></a>
         <div class="nav-next">
             
-                <a href="https://rastamouse.me/blog/covenant-payloads/"><i class="fas fa-chevron-right"></i></a>
+                <a href="/rastamouse.me-old_blog/blog/covenant-payloads/"><i class="fas fa-chevron-right"></i></a>
             
         </div>
     </div>
@@ -155,5 +155,5 @@
 </div>
 </footer></main>
     </body>
-    <script src=https://rastamouse.me/js/navbutton.js></script>
+    <script src=/rastamouse.me-old_blog/js/navbutton.js></script>
 </html>

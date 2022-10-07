@@ -5,14 +5,14 @@
     <meta name="description" content="Offensive Security Engineering &amp; Shenanigans">
     <meta name="Author" content="Rasta Mouse">
     <meta name="keywords" content="offensive security red team pentesting">
-    <link rel="stylesheet" href=https://rastamouse.me/css/syntax.css>
-    <link rel="stylesheet" href=https://rastamouse.me/css/style.css>
+    <link rel="stylesheet" href=/rastamouse.me-old_blog/css/syntax.css>
+    <link rel="stylesheet" href=/rastamouse.me-old_blog/css/style.css>
     <script src="https://kit.fontawesome.com/1b7478c139.js" crossorigin="anonymous"></script>
     <title>Cheesy Rumbles</title>
   </head><body><aside id="sidenav">
     <header>
     
-        <a href=https://rastamouse.me><img src="https://rastamouse.me/avatar.png" alt="avatar"></a>
+        <a href=https://rastamouse.me><img src="/rastamouse.me-old_blog/avatar.png" alt="avatar"></a>
         
     
 
@@ -26,7 +26,7 @@
     <nav>
         
             		
-            <a href="/"
+            <a href="/rastamouse.me-old_blog/"
                 
             >
                 <i class="fas fa-home fa-sm"></i>
@@ -34,7 +34,7 @@
             </a>
         
             		
-            <a href="/blog/"
+            <a href="/rastamouse.me-old_blog/blog/"
                 
             >
                 <i class="fas fa-keyboard fa-ms"></i>
@@ -42,7 +42,7 @@
             </a>
         
             		
-            <a href="/tags"
+            <a href="/rastamouse.me-old_blog/tags"
                 
             >
                 <i class="fas fa-tags fa-ms"></i>
@@ -70,7 +70,7 @@
             </a>
         
             		
-            <a href="/index.xml"
+            <a href="/rastamouse.me-old_blog/index.xml"
                 
             >
                 <i class="fas fa-rss fa-ms"></i>
@@ -97,7 +97,7 @@
     </li>
   </ul>
 </nav>
-    <p>Back in October 2018 (yes, 2018!), I <del>approached</del> begged <a href="https://twitter.com/_xpn_">xpn</a> for a collaboration on an idea I had for a .NET C2 Framework.  We worked on the project for about a month or so before real life got in the way and stalled development.  In February 2019, <a href="https://twitter.com/cobbr_io">cobbr</a> released <a href="https://github.com/cobbr/Covenant">Covenant</a> which is also a .NET C2 Framework.  I subsequently spent some time <a href="https://github.com/cobbr/Covenant/commits?author=rasta-mouse">contributing</a> to, and <a href="https://rastamouse.me/tags/covenant/">writing about</a> Covenant - but I&rsquo;ve always wanted to get back to our original project.</p>
+    <p>Back in October 2018 (yes, 2018!), I <del>approached</del> begged <a href="https://twitter.com/_xpn_">xpn</a> for a collaboration on an idea I had for a .NET C2 Framework.  We worked on the project for about a month or so before real life got in the way and stalled development.  In February 2019, <a href="https://twitter.com/cobbr_io">cobbr</a> released <a href="https://github.com/cobbr/Covenant">Covenant</a> which is also a .NET C2 Framework.  I subsequently spent some time <a href="https://github.com/cobbr/Covenant/commits?author=rasta-mouse">contributing</a> to, and <a href="/rastamouse.me-old_blog/tags/covenant/">writing about</a> Covenant - but I&rsquo;ve always wanted to get back to our original project.</p>
 <p>I decided to re-visit SharpC2 (a very creative name on my part) over the 2019 Christmas period to try and get it into a position where we could release a proof of concept.  Yet somehow I&rsquo;m not writing this until May 2020!  We can blame my <a href="https://www.zeropointsecurity.co.uk/annoucements/2020/4/13/red-team-ops-is-back">RTO course</a> for that.</p>
 <p>This post is intended to provide an overview of SharpC2&rsquo;s design concepts and some showcase examples of how it can be used.  Code can be found on <a href="https://github.com/SharpC2/SharpC2/tree/dev">GitHub</a>.</p>
 <h3 id="project-outcomes">Project Outcomes</h3>
@@ -117,7 +117,7 @@
 <h3 id="solution">Solution</h3>
 <p>Right now, the SharpC2 Visual Studio Solution is made of 7 projects.</p>
 <figure>
-    <img src="/images/sharpc2/vs-solution.png"/> 
+    <img src="/rastamouse.me-old_blog/images/sharpc2/vs-solution.png"/> 
 </figure>
 
 <ul>
@@ -136,7 +136,7 @@
 <li>Modules</li>
 </ul>
 <figure>
-    <img src="/images/sharpc2/vs-agent.png"/> 
+    <img src="/rastamouse.me-old_blog/images/sharpc2/vs-agent.png"/> 
 </figure>
 
 <p>In most cases, an operator should not need to modify the Controllers or Interfaces unless they want to make significant changes to the internals.  The <code>AgentController</code> provides public methods such as <code>SendCommandOutput</code> that are used by other Modules (more on those in a bit), which simply queues up command and control data to be sent by the <code>CommModule</code>.  The <code>ConfigurationController</code> allows an operator to set options within the Agent, such as its sleep and jitter.</p>
@@ -188,7 +188,7 @@
 <h4 id="team-server">Team Server</h4>
 <p>The architecture of the Team Sever is very similar, in that the core components are also Controllers, Interfaces and Modules.</p>
 <figure>
-    <img src="/images/sharpc2/vs-teamserver.png"/> 
+    <img src="/rastamouse.me-old_blog/images/sharpc2/vs-teamserver.png"/> 
 </figure>
 
 <p>The <code>ClientController</code> handles client authentication and returns information requested about authenticated users.  The <code>AgentController</code> handles the session data from agents currently checking into the Team Server and the <code>ServerController</code> acts as a bridge between the different components that need to talk to each other.</p>
@@ -223,25 +223,25 @@
 </code></pre></div><p>We could do <code>Assembly.Load(); GetType(&quot;Example&quot;).GetMethod(&quot;Start&quot;).Invoke(null, parameters);</code> but we wouldn&rsquo;t have subsequent access to the <code>Stop()</code> method.  We can&rsquo;t do <code>Assembly.Load(); GetType(&quot;Example&quot;).GetMethod(&quot;Stop&quot;).Invoke(null, parameters);</code> because we&rsquo;d have loaded a completely new instance of the assembly.</p>
 <p>That&rsquo;s not a problem with <code>CreateInstance</code> - the disadvantage being that the assembly hangs around whilst the agent is running.</p>
 <figure>
-    <img src="/images/sharpc2/stageone-loaded.png"/> 
+    <img src="/rastamouse.me-old_blog/images/sharpc2/stageone-loaded.png"/> 
 </figure>
 
 <h3 id="demo">Demo</h3>
 <p>The TeamServer has a very basic Blazor interface to demo the functionality of the framework. The 3 elements to this view are the agent grid (top), command output (middle), command box (bottom).</p>
 <figure>
-    <img src="/images/sharpc2/agent-basic.png"/> 
+    <img src="/rastamouse.me-old_blog/images/sharpc2/agent-basic.png"/> 
 </figure>
 
 <p>To interact with an agent, simply click on it in the grid.  The command output region will show any output from that agent and the placeholder in the command box will update to reflect the selected agent&rsquo;s ID.</p>
 <p>Commands are issued in the format <code>[module] [command] [data]</code>.  For example <code>core pwd</code> or <code>core ls C:\</code>.  Typing <code>help</code> will show the commands available.  This is contextual to each agent, depending on the modules that are loaded.</p>
 <p>To load an external module, we must encode to a base64 string.</p>
 <figure>
-    <img src="/images/sharpc2/agent-loadmodule.png"/> 
+    <img src="/rastamouse.me-old_blog/images/sharpc2/agent-loadmodule.png"/> 
 </figure>
 
 <p>Chain multiple TCP Agents using the <code>link</code> command.</p>
 <figure>
-    <img src="/images/sharpc2/agent-tcpchain.png"/> 
+    <img src="/rastamouse.me-old_blog/images/sharpc2/agent-tcpchain.png"/> 
 </figure>
 
 <p>The StageOne module extends the agent by providing fork-and-run-style capabilities.  That is, to spawn a sacrificial process to house post-ex functionality.</p>
@@ -258,7 +258,7 @@ Reply from 127.0.0.1: bytes=32 time&lt;1ms TTL=128
 Reply from 127.0.0.1: bytes=32 time&lt;1ms TTL=128
 Reply from 127.0.0.1: bytes=32 time&lt;1ms TTL=128
 </code></pre></div><figure>
-    <img src="/images/sharpc2/ping-default.png"/> 
+    <img src="/rastamouse.me-old_blog/images/sharpc2/ping-default.png"/> 
 </figure>
 
 <div class="highlight"><pre class="chroma"><code class="language-text" data-lang="text">[+] 10/05/2020 15:53:46 : AgentCommandRequest
@@ -271,7 +271,7 @@ Process Id  Process Name
 ----------  ------------
 10992       Explorer.EXE
 </code></pre></div><figure>
-    <img src="/images/sharpc2/ping-ppid.png"/> 
+    <img src="/rastamouse.me-old_blog/images/sharpc2/ping-ppid.png"/> 
 </figure>
 
 <p>I have a demo .NET assembly that can be turned into shellcode (with <a href="https://github.com/TheWover/donut">donut</a>), injected into a sacrificial process and the output collected.</p>
@@ -296,7 +296,7 @@ Disabled
 --------
 True
 </code></pre></div><figure>
-    <img src="/images/sharpc2/notepad-clr.png"/> 
+    <img src="/rastamouse.me-old_blog/images/sharpc2/notepad-clr.png"/> 
 </figure>
 
 <div class="highlight"><pre class="chroma"><code class="language-text" data-lang="text">[+] 10/05/2020 17:32:56 : AgentCommandResponse
@@ -340,13 +340,13 @@ The document has moved
     <div class="nav-next-prev">
         <div class="nav-prev">
             
-                <a href="https://rastamouse.me/blog/gadgettojscript/"><i class="fas fa-chevron-left"></i></a>
+                <a href="/rastamouse.me-old_blog/blog/gadgettojscript/"><i class="fas fa-chevron-left"></i></a>
             
         </div>
         <a class="nav-top" href="#">top</i></a>
         <div class="nav-next">
             
-                <a href="https://rastamouse.me/blog/process-injection-dinvoke/"><i class="fas fa-chevron-right"></i></a>
+                <a href="/rastamouse.me-old_blog/blog/process-injection-dinvoke/"><i class="fas fa-chevron-right"></i></a>
             
         </div>
     </div>
@@ -361,5 +361,5 @@ The document has moved
 </div>
 </footer></main>
     </body>
-    <script src=https://rastamouse.me/js/navbutton.js></script>
+    <script src=/rastamouse.me-old_blog/js/navbutton.js></script>
 </html>

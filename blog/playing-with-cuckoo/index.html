@@ -5,14 +5,14 @@
     <meta name="description" content="Offensive Security Engineering &amp; Shenanigans">
     <meta name="Author" content="Rasta Mouse">
     <meta name="keywords" content="offensive security red team pentesting">
-    <link rel="stylesheet" href=https://rastamouse.me/css/syntax.css>
-    <link rel="stylesheet" href=https://rastamouse.me/css/style.css>
+    <link rel="stylesheet" href=/rastamouse.me-old_blog/css/syntax.css>
+    <link rel="stylesheet" href=/rastamouse.me-old_blog/css/style.css>
     <script src="https://kit.fontawesome.com/1b7478c139.js" crossorigin="anonymous"></script>
     <title>Cheesy Rumbles</title>
   </head><body><aside id="sidenav">
     <header>
     
-        <a href=https://rastamouse.me><img src="https://rastamouse.me/avatar.png" alt="avatar"></a>
+        <a href=https://rastamouse.me><img src="/rastamouse.me-old_blog/avatar.png" alt="avatar"></a>
         
     
 
@@ -26,7 +26,7 @@
     <nav>
         
             		
-            <a href="/"
+            <a href="/rastamouse.me-old_blog/"
                 
             >
                 <i class="fas fa-home fa-sm"></i>
@@ -34,7 +34,7 @@
             </a>
         
             		
-            <a href="/blog/"
+            <a href="/rastamouse.me-old_blog/blog/"
                 
             >
                 <i class="fas fa-keyboard fa-ms"></i>
@@ -42,7 +42,7 @@
             </a>
         
             		
-            <a href="/tags"
+            <a href="/rastamouse.me-old_blog/tags"
                 
             >
                 <i class="fas fa-tags fa-ms"></i>
@@ -70,7 +70,7 @@
             </a>
         
             		
-            <a href="/index.xml"
+            <a href="/rastamouse.me-old_blog/index.xml"
                 
             >
                 <i class="fas fa-rss fa-ms"></i>
@@ -114,11 +114,11 @@
 <p>You will obviously need to decide if this is an issue for you based on your planned usage.</p>
 <p>The architecture that we are going to setup, looks as follows:</p>
 <p><figure>
-    <img src="/images/cuckoo/arch.png"/> 
+    <img src="/rastamouse.me-old_blog/images/cuckoo/arch.png"/> 
 </figure>
 
 <figure>
-    <img src="/images/cuckoo/network.png"/> 
+    <img src="/rastamouse.me-old_blog/images/cuckoo/network.png"/> 
 </figure>
 </p>
 <p>So that&rsquo;s a bunch of VirtualBox VMs running inside a VMware VM :)</p>
@@ -190,7 +190,7 @@ start Cuckoo again <span class="o">(</span>by running <span class="sb">`</span>c
 </code></pre></div><h2 id="configuring-the-guest-vms">Configuring the Guest VMs</h2>
 <p>Hop into the GUI by running <code>startx</code>. Open VirtualBox and create your base VMs - I&rsquo;m just going to create Windows 7 32-bit &amp; 64-bit VMs called <code>Win7x86</code> and <code>Win7x64</code> respectively.  They small VMs with 1 CPU, 512MB RAM, 10GB HDD and 1 NIC attached to <code>vboxnet0</code>.</p>
 <figure>
-    <img src="/images/cuckoo/vbox.png"/> 
+    <img src="/rastamouse.me-old_blog/images/cuckoo/vbox.png"/> 
 </figure>
 
 <p>Set a static IP in each VM.</p>
@@ -223,7 +223,7 @@ cuckoo@cuckoo:~/.cuckoo/agent$ python -m SimpleHTTPServer
 Serving HTTP on 0.0.0.0 port <span class="m">8000</span> ...
 </code></pre></div><p>Start the agent by opening a <code>Command Prompt as Administrator</code>.</p>
 <figure>
-    <img src="/images/cuckoo/agent.png"/> 
+    <img src="/rastamouse.me-old_blog/images/cuckoo/agent.png"/> 
 </figure>
 
 <p>You won&rsquo;t see any output, just minimise the window and leave it running.</p>
@@ -240,7 +240,7 @@ Restoring snapshot 4ef19a21-25c8-4ddf-81b2-4a65ce2b5278
 0%...10%...20%...30%...40%...50%...60%...70%...80%...90%...100%
 </code></pre></div><p>In the GUI, they should appear as <code>Saved</code>.</p>
 <figure>
-    <img src="/images/cuckoo/vbox-saved.png"/> 
+    <img src="/rastamouse.me-old_blog/images/cuckoo/vbox-saved.png"/> 
 </figure>
 
 <h2 id="configuring-cuckoo">Configuring Cuckoo</h2>
@@ -292,12 +292,12 @@ Django version 1.8.4, using settings <span class="s1">&#39;cuckoo.web.web.settin
 Starting development server at http://192.168.45.128:8080/
 Quit the server with CONTROL-C.
 </code></pre></div><figure>
-    <img src="/images/cuckoo/web-gui.png"/> 
+    <img src="/rastamouse.me-old_blog/images/cuckoo/web-gui.png"/> 
 </figure>
 
 <p>You can then submit a sample and enjoy the results  :)</p>
 <figure>
-    <img src="/images/cuckoo/wannacry.png"/> 
+    <img src="/rastamouse.me-old_blog/images/cuckoo/wannacry.png"/> 
 </figure>
 
 <h4 id="shoutout">Shoutout</h4>
@@ -306,13 +306,13 @@ Quit the server with CONTROL-C.
     <div class="nav-next-prev">
         <div class="nav-prev">
             
-                <a href="https://rastamouse.me/blog/a-citrix-story/"><i class="fas fa-chevron-left"></i></a>
+                <a href="/rastamouse.me-old_blog/blog/a-citrix-story/"><i class="fas fa-chevron-left"></i></a>
             
         </div>
         <a class="nav-top" href="#">top</i></a>
         <div class="nav-next">
             
-                <a href="https://rastamouse.me/blog/psexec-much/"><i class="fas fa-chevron-right"></i></a>
+                <a href="/rastamouse.me-old_blog/blog/psexec-much/"><i class="fas fa-chevron-right"></i></a>
             
         </div>
     </div>
@@ -327,5 +327,5 @@ Quit the server with CONTROL-C.
 </div>
 </footer></main>
     </body>
-    <script src=https://rastamouse.me/js/navbutton.js></script>
+    <script src=/rastamouse.me-old_blog/js/navbutton.js></script>
 </html>

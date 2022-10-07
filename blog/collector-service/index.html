@@ -5,14 +5,14 @@
     <meta name="description" content="Offensive Security Engineering &amp; Shenanigans">
     <meta name="Author" content="Rasta Mouse">
     <meta name="keywords" content="offensive security red team pentesting">
-    <link rel="stylesheet" href=https://rastamouse.me/css/syntax.css>
-    <link rel="stylesheet" href=https://rastamouse.me/css/style.css>
+    <link rel="stylesheet" href=/rastamouse.me-old_blog/css/syntax.css>
+    <link rel="stylesheet" href=/rastamouse.me-old_blog/css/style.css>
     <script src="https://kit.fontawesome.com/1b7478c139.js" crossorigin="anonymous"></script>
     <title>Cheesy Rumbles</title>
   </head><body><aside id="sidenav">
     <header>
     
-        <a href=https://rastamouse.me><img src="https://rastamouse.me/avatar.png" alt="avatar"></a>
+        <a href=https://rastamouse.me><img src="/rastamouse.me-old_blog/avatar.png" alt="avatar"></a>
         
     
 
@@ -26,7 +26,7 @@
     <nav>
         
             		
-            <a href="/"
+            <a href="/rastamouse.me-old_blog/"
                 
             >
                 <i class="fas fa-home fa-sm"></i>
@@ -34,7 +34,7 @@
             </a>
         
             		
-            <a href="/blog/"
+            <a href="/rastamouse.me-old_blog/blog/"
                 
             >
                 <i class="fas fa-keyboard fa-ms"></i>
@@ -42,7 +42,7 @@
             </a>
         
             		
-            <a href="/tags"
+            <a href="/rastamouse.me-old_blog/tags"
                 
             >
                 <i class="fas fa-tags fa-ms"></i>
@@ -70,7 +70,7 @@
             </a>
         
             		
-            <a href="/index.xml"
+            <a href="/rastamouse.me-old_blog/index.xml"
                 
             >
                 <i class="fas fa-rss fa-ms"></i>
@@ -94,7 +94,7 @@
     <li><a href="#demo">Demo</a></li>
   </ul>
 </nav>
-    <p>In my <a href="https://rastamouse.me/2019/04/weaponizing-cve-2019-0841-with-laps/">previous post</a>, I described how one could leverage CVE-2019-0841 to backdoor the LAPS <code>AdmPwd.dll</code> for EoP to <code>NT AUTHORITY\SYSTEM</code>.  The obvious question is that if a machine is not using LAPS, what can you do&hellip;?  Well <a href="https://twitter.com/buffaloverflow">Rich Warren</a> provided <a href="https://twitter.com/buffaloverflow/status/1117507864824881153">one solution</a>, by using the Windows Diagnostics Hub Standard Collector Service.</p>
+    <p>In my <a href="/rastamouse.me-old_blog/2019/04/weaponizing-cve-2019-0841-with-laps/">previous post</a>, I described how one could leverage CVE-2019-0841 to backdoor the LAPS <code>AdmPwd.dll</code> for EoP to <code>NT AUTHORITY\SYSTEM</code>.  The obvious question is that if a machine is not using LAPS, what can you do&hellip;?  Well <a href="https://twitter.com/buffaloverflow">Rich Warren</a> provided <a href="https://twitter.com/buffaloverflow/status/1117507864824881153">one solution</a>, by using the Windows Diagnostics Hub Standard Collector Service.</p>
 <h2 id="design-ethos">Design Ethos</h2>
 <p>Before we dive into any code, let&rsquo;s think about the situation more generically.</p>
 <p>CVE-2019-0841 allows low privileged users to overwrite the DACL on files that are owned by <code>NT AUTHORITY\SYSTEM</code>.  Successful exploitation results in <code>Full Control</code> over the target file for the low priv user.  This, in isolation, doesn&rsquo;t result in code exec as <code>SYSTEM</code>, pop a <code>SYSTEM</code> shell or anything like that.  But having <code>Full Control</code> over a file means that you can modify it in some way, e.g. write or delete.</p>
@@ -113,7 +113,7 @@
 </code></pre></div><p>Where <code>path</code> is the target file to take <code>Full Control</code> over (<code>C:\Windows\System32\license.rtf</code>) and <code>settings</code> is the path to the users&rsquo; MSEdge <code>settings.dat</code> file.</p>
 <p>My project is in the same Solution as SystemCollector, so I can a project reference.</p>
 <figure>
-    <img src="/images/collector-service/reference.png"/> 
+    <img src="/rastamouse.me-old_blog/images/collector-service/reference.png"/> 
 </figure>
 
 <p>After the exploit has verified that the user has taken control of the file, we simply add the following line:</p>
@@ -136,7 +136,7 @@
 </code></pre></div><p>The final change was to replace <code>Console.ReadLine();</code> with <code>Thread.Sleep(3000);</code>.  I found that if the application closes too quickly, the Collector Service does not load the DLL.</p>
 <p>The DLL is loaded by <code>DiagnosticsHub.StandardCollector.Service.exe</code> which, in my testing, closes after about 5 minutes and subsequently kills the Beacon.</p>
 <figure>
-    <img src="/images/collector-service/procexp.png"/> 
+    <img src="/rastamouse.me-old_blog/images/collector-service/procexp.png"/> 
 </figure>
 
 <h2 id="demo">Demo</h2>
@@ -147,13 +147,13 @@
     <div class="nav-next-prev">
         <div class="nav-prev">
             
-                <a href="https://rastamouse.me/blog/weaponizing-cve-2019-0841/"><i class="fas fa-chevron-left"></i></a>
+                <a href="/rastamouse.me-old_blog/blog/weaponizing-cve-2019-0841/"><i class="fas fa-chevron-left"></i></a>
             
         </div>
         <a class="nav-top" href="#">top</i></a>
         <div class="nav-next">
             
-                <a href="https://rastamouse.me/blog/tikispawn-msbuild/"><i class="fas fa-chevron-right"></i></a>
+                <a href="/rastamouse.me-old_blog/blog/tikispawn-msbuild/"><i class="fas fa-chevron-right"></i></a>
             
         </div>
     </div>
@@ -168,5 +168,5 @@
 </div>
 </footer></main>
     </body>
-    <script src=https://rastamouse.me/js/navbutton.js></script>
+    <script src=/rastamouse.me-old_blog/js/navbutton.js></script>
 </html>

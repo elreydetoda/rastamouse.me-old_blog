@@ -5,14 +5,14 @@
     <meta name="description" content="Offensive Security Engineering &amp; Shenanigans">
     <meta name="Author" content="Rasta Mouse">
     <meta name="keywords" content="offensive security red team pentesting">
-    <link rel="stylesheet" href=https://rastamouse.me/css/syntax.css>
-    <link rel="stylesheet" href=https://rastamouse.me/css/style.css>
+    <link rel="stylesheet" href=/rastamouse.me-old_blog/css/syntax.css>
+    <link rel="stylesheet" href=/rastamouse.me-old_blog/css/style.css>
     <script src="https://kit.fontawesome.com/1b7478c139.js" crossorigin="anonymous"></script>
     <title>Cheesy Rumbles</title>
   </head><body><aside id="sidenav">
     <header>
     
-        <a href=https://rastamouse.me><img src="https://rastamouse.me/avatar.png" alt="avatar"></a>
+        <a href=https://rastamouse.me><img src="/rastamouse.me-old_blog/avatar.png" alt="avatar"></a>
         
     
 
@@ -26,7 +26,7 @@
     <nav>
         
             		
-            <a href="/"
+            <a href="/rastamouse.me-old_blog/"
                 
             >
                 <i class="fas fa-home fa-sm"></i>
@@ -34,7 +34,7 @@
             </a>
         
             		
-            <a href="/blog/"
+            <a href="/rastamouse.me-old_blog/blog/"
                 
             >
                 <i class="fas fa-keyboard fa-ms"></i>
@@ -42,7 +42,7 @@
             </a>
         
             		
-            <a href="/tags"
+            <a href="/rastamouse.me-old_blog/tags"
                 
             >
                 <i class="fas fa-tags fa-ms"></i>
@@ -70,7 +70,7 @@
             </a>
         
             		
-            <a href="/index.xml"
+            <a href="/rastamouse.me-old_blog/index.xml"
                 
             >
                 <i class="fas fa-rss fa-ms"></i>
@@ -90,7 +90,7 @@
     <p>Before we can really dive into modifying GPOs, we need to try and understand some of the intricacies of how they&rsquo;re updated normally in GPMC and AD.  Because believe me, it aint as simple as it appears.</p>
 <p>When you first create and name a GPO and then look at it the Details tab, you&rsquo;ll see it has these <code>User</code> and <code>Computer</code> version fields, with <code># (AD), # (SYSVOL)</code>.</p>
 <figure>
-    <img src="/images/gpo-abuse-pt2/test-gpo.png"/> 
+    <img src="/rastamouse.me-old_blog/images/gpo-abuse-pt2/test-gpo.png"/> 
 </figure>
 
 <p>For every GPO, there is also a corresponding path on disk (which I believe is called the Group Policy Template) at <code>C:\Windows\SYSVOL\domain\Policies\&lt;guid&gt;</code>.  For this GPO, it would be <code>C:\Windows\SYSVOL\domain\Policies\{F3003ADC-17E3-4FBE-A11E-6A41779ADD6E}</code>.  From a domain member, you can also access SYSVOL over its network share e.g. <code>\\testlab.local\SYSVOL\testlab.local\Policies\{F3003ADC-17E3-4FBE-A11E-6A41779ADD6E}</code>.</p>
@@ -117,7 +117,7 @@ displayName=New Group Policy Object
 </blockquote>
 <p>If we make some changes to the GPO and refresh GPMC, we can see that the <code>AD</code> and <code>SYSVOL</code> numbers for <code>Computer</code> have been pushed up.</p>
 <figure>
-    <img src="/images/gpo-abuse-pt2/gpo-change-1.png"/> 
+    <img src="/rastamouse.me-old_blog/images/gpo-abuse-pt2/gpo-change-1.png"/> 
 </figure>
 
 <p>They seem to increase for every individual change that happens, but since GPMC does all sorts in the background that you can&rsquo;t see unless you&rsquo;re monitoring with something like Process Monitor, seemingly small changes can result in a large increase.</p>
@@ -129,7 +129,7 @@ Version=12
 displayName=New Group Policy Object
 </code></pre></div><p>It gets a bit more complicated if you have a GPO that applies both <code>Computer</code> and <code>User</code> policies, since the number format of <code>GPT.INI</code> changes.</p>
 <figure>
-    <img src="/images/gpo-abuse-pt2/gpo-change-2.png"/> 
+    <img src="/rastamouse.me-old_blog/images/gpo-abuse-pt2/gpo-change-2.png"/> 
 </figure>
 
 <div class="highlight"><pre class="chroma"><code class="language-text" data-lang="text">PS &gt; cat &#34;\\testlab.local\SYSVOL\testlab.local\Policies\{F3003ADC-17E3-4FBE-A11E-6A41779ADD6E}\GPT.INI&#34;
@@ -167,13 +167,13 @@ versionnumber
     <div class="nav-next-prev">
         <div class="nav-prev">
             
-                <a href="https://rastamouse.me/blog/gpo-abuse-pt1/"><i class="fas fa-chevron-left"></i></a>
+                <a href="/rastamouse.me-old_blog/blog/gpo-abuse-pt1/"><i class="fas fa-chevron-left"></i></a>
             
         </div>
         <a class="nav-top" href="#">top</i></a>
         <div class="nav-next">
             
-                <a href="https://rastamouse.me/blog/tikitorch/"><i class="fas fa-chevron-right"></i></a>
+                <a href="/rastamouse.me-old_blog/blog/tikitorch/"><i class="fas fa-chevron-right"></i></a>
             
         </div>
     </div>
@@ -188,5 +188,5 @@ versionnumber
 </div>
 </footer></main>
     </body>
-    <script src=https://rastamouse.me/js/navbutton.js></script>
+    <script src=/rastamouse.me-old_blog/js/navbutton.js></script>
 </html>

@@ -5,14 +5,14 @@
     <meta name="description" content="Offensive Security Engineering &amp; Shenanigans">
     <meta name="Author" content="Rasta Mouse">
     <meta name="keywords" content="offensive security red team pentesting">
-    <link rel="stylesheet" href=https://rastamouse.me/css/syntax.css>
-    <link rel="stylesheet" href=https://rastamouse.me/css/style.css>
+    <link rel="stylesheet" href=/rastamouse.me-old_blog/css/syntax.css>
+    <link rel="stylesheet" href=/rastamouse.me-old_blog/css/style.css>
     <script src="https://kit.fontawesome.com/1b7478c139.js" crossorigin="anonymous"></script>
     <title>Cheesy Rumbles</title>
   </head><body><aside id="sidenav">
     <header>
     
-        <a href=https://rastamouse.me><img src="https://rastamouse.me/avatar.png" alt="avatar"></a>
+        <a href=https://rastamouse.me><img src="/rastamouse.me-old_blog/avatar.png" alt="avatar"></a>
         
     
 
@@ -26,7 +26,7 @@
     <nav>
         
             		
-            <a href="/"
+            <a href="/rastamouse.me-old_blog/"
                 
             >
                 <i class="fas fa-home fa-sm"></i>
@@ -34,7 +34,7 @@
             </a>
         
             		
-            <a href="/blog/"
+            <a href="/rastamouse.me-old_blog/blog/"
                 
             >
                 <i class="fas fa-keyboard fa-ms"></i>
@@ -42,7 +42,7 @@
             </a>
         
             		
-            <a href="/tags"
+            <a href="/rastamouse.me-old_blog/tags"
                 
             >
                 <i class="fas fa-tags fa-ms"></i>
@@ -70,7 +70,7 @@
             </a>
         
             		
-            <a href="/index.xml"
+            <a href="/rastamouse.me-old_blog/index.xml"
                 
             >
                 <i class="fas fa-rss fa-ms"></i>
@@ -90,7 +90,7 @@
     <p>Back in April 2017, <a href="https://twitter.com/tiraniddo">James Forshaw</a> (hail) released a tool called <a href="https://github.com/tyranid/DotNetToJScript">DotNetToJScript</a> which was capable of generating JScript, VBA and VBScript that could run an arbitrary .NET assembly (mostly) from memory.  Although not its intended purpose, it was quickly picked up by tool developers, pentesters, red teamers, bad guys etc and used to deliver .NET-based payloads via methods such as <a href="https://en.wikipedia.org/wiki/HTML_Application">HTA</a>.</p>
 <p>Microsoft and other AV vendors started writing signatures for DN2JS, and we all know how that makes James feel (Exhibits <a href="https://twitter.com/tiraniddo/status/1204970332127236097">A</a> and <a href="https://twitter.com/tiraniddo/status/951489836027990019">B</a>).  Microsoft even went as far as to make some under-the-hood changes from Windows 10 / 2K16 to mitigate the use of DN2JS payloads, as evidenced by these notes in Covenant:</p>
 <figure>
-    <img src="/images/gadgettojscript/covenant.png"/> 
+    <img src="/rastamouse.me-old_blog/images/gadgettojscript/covenant.png"/> 
 </figure>
 
 <p>These factors seem to have resulted in a decline in prevalence for these payloads, or at least, they&rsquo;re not hyped about so much.</p>
@@ -100,7 +100,7 @@
 <p>Since the <code>ActivitySurrogateSelector</code> portion of G2JS is based on the work in <a href="https://github.com/pwntester/ysoserial.net">ysoserial.net</a>, it&rsquo;s no surprise that they seem to work in similar ways.  The ysoserial.net usage example says <code>ActivitySurrogateSelector (This gadget ignores the command parameter and executes the constructor of ExploitClass class.)</code>.  The <code>ExploitClass</code> is <a href="https://github.com/pwntester/ysoserial.net/blob/master/ysoserial/ExploitClass.cs">here</a> and is actually compiled into the binary.</p>
 <p>G2JS also requires that we execute from the constructor of a class; the out-of-the-box payload is hardcoded into the G2JS binary (as a string no less) and any required Reference Assemblies are hardcoded.</p>
 <figure>
-    <img src="/images/gadgettojscript/test-assembly-loader.png"/> 
+    <img src="/rastamouse.me-old_blog/images/gadgettojscript/test-assembly-loader.png"/> 
 </figure>
 
 <p>To me, this isn&rsquo;t a very friendly approach, as I don&rsquo;t want to modify and recompile G2JS for each payload I want to generate.  Chirag <a href="https://gist.github.com/3xpl01tc0d3r/ecf5e1ac09935c674a9c6939c694da13#file-testassemblyloader-cs-L25">solved</a> this issue by modifying the <code>TestAssemblyLoader</code> class to read the payload in from a text file (from the current working directory), but still has this limitation of <a href="https://gist.github.com/3xpl01tc0d3r/ecf5e1ac09935c674a9c6939c694da13#file-testassemblyloader-cs-L18-L22">hardcoding</a> any reference assemblies required by the compiler.</p>
@@ -126,7 +126,7 @@ Usage:
 </blockquote>
 <p>This test payload was written in a completely separate .NET Class Library project.  We can see that it&rsquo;s using <code>System.Windows.Forms</code> to display a MessageBox.</p>
 <figure>
-    <img src="/images/gadgettojscript/test-payload.png"/> 
+    <img src="/rastamouse.me-old_blog/images/gadgettojscript/test-payload.png"/> 
 </figure>
 
 <p>If we try to build this, it will fail because the G2JS compiler has no reference to the <code>Forms</code> namespace.</p>
@@ -139,7 +139,7 @@ Unhandled Exception: System.InvalidOperationException: Error (CS0234): The type 
 </code></pre></div><p>To &ldquo;fix&rdquo; this, all we need to do is specify <code>System.Windows.Forms.dll</code> as a reference.</p>
 <div class="highlight"><pre class="chroma"><code class="language-text" data-lang="text">&gt; GadgetToJScript.exe -i ..\..\..\TestPayload\TestClass.cs -r System.Windows.Forms.dll -w js -o D:\Tools\msgbox
 </code></pre></div><figure>
-    <img src="/images/gadgettojscript/msgbox.png"/> 
+    <img src="/rastamouse.me-old_blog/images/gadgettojscript/msgbox.png"/> 
 </figure>
 
 <p>I won&rsquo;t bother going into more complex payloads, as Chirag already did a good job with that.  Hopefully these modifications will make it a little easier and more practical for people to pick up and use GadgetToJScript.</p>
@@ -147,13 +147,13 @@ Unhandled Exception: System.InvalidOperationException: Error (CS0234): The type 
     <div class="nav-next-prev">
         <div class="nav-prev">
             
-                <a href="https://rastamouse.me/blog/covenant-tasks-101/"><i class="fas fa-chevron-left"></i></a>
+                <a href="/rastamouse.me-old_blog/blog/covenant-tasks-101/"><i class="fas fa-chevron-left"></i></a>
             
         </div>
         <a class="nav-top" href="#">top</i></a>
         <div class="nav-next">
             
-                <a href="https://rastamouse.me/blog/sharpc2/"><i class="fas fa-chevron-right"></i></a>
+                <a href="/rastamouse.me-old_blog/blog/sharpc2/"><i class="fas fa-chevron-right"></i></a>
             
         </div>
     </div>
@@ -168,5 +168,5 @@ Unhandled Exception: System.InvalidOperationException: Error (CS0234): The type 
 </div>
 </footer></main>
     </body>
-    <script src=https://rastamouse.me/js/navbutton.js></script>
+    <script src=/rastamouse.me-old_blog/js/navbutton.js></script>
 </html>

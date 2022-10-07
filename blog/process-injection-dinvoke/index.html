@@ -5,14 +5,14 @@
     <meta name="description" content="Offensive Security Engineering &amp; Shenanigans">
     <meta name="Author" content="Rasta Mouse">
     <meta name="keywords" content="offensive security red team pentesting">
-    <link rel="stylesheet" href=https://rastamouse.me/css/syntax.css>
-    <link rel="stylesheet" href=https://rastamouse.me/css/style.css>
+    <link rel="stylesheet" href=/rastamouse.me-old_blog/css/syntax.css>
+    <link rel="stylesheet" href=/rastamouse.me-old_blog/css/style.css>
     <script src="https://kit.fontawesome.com/1b7478c139.js" crossorigin="anonymous"></script>
     <title>Cheesy Rumbles</title>
   </head><body><aside id="sidenav">
     <header>
     
-        <a href=https://rastamouse.me><img src="https://rastamouse.me/avatar.png" alt="avatar"></a>
+        <a href=https://rastamouse.me><img src="/rastamouse.me-old_blog/avatar.png" alt="avatar"></a>
         
     
 
@@ -26,7 +26,7 @@
     <nav>
         
             		
-            <a href="/"
+            <a href="/rastamouse.me-old_blog/"
                 
             >
                 <i class="fas fa-home fa-sm"></i>
@@ -34,7 +34,7 @@
             </a>
         
             		
-            <a href="/blog/"
+            <a href="/rastamouse.me-old_blog/blog/"
                 
             >
                 <i class="fas fa-keyboard fa-ms"></i>
@@ -42,7 +42,7 @@
             </a>
         
             		
-            <a href="/tags"
+            <a href="/rastamouse.me-old_blog/tags"
                 
             >
                 <i class="fas fa-tags fa-ms"></i>
@@ -70,7 +70,7 @@
             </a>
         
             		
-            <a href="/index.xml"
+            <a href="/rastamouse.me-old_blog/index.xml"
                 
             >
                 <i class="fas fa-rss fa-ms"></i>
@@ -140,12 +140,12 @@
 <span class="p">}</span>
 </code></pre></div><p>If we use <a href="http://www.rohitab.com/apimonitor">API Monitor</a> as our would-be EDR, set hooks on these API calls and execute <code>InjectionTest.exe</code>, we can see how it picks up the details of our calls.</p>
 <figure>
-    <img src="/images/dinvoke/WriteProcessMemory.png"/> 
+    <img src="/rastamouse.me-old_blog/images/dinvoke/WriteProcessMemory.png"/> 
 </figure>
 
 <p>Furthermore, we can see how the assembly is locating those API calls at runtime using <code>GetProcAddress</code>.</p>
 <figure>
-    <img src="/images/dinvoke/GetProcAddress.png"/> 
+    <img src="/rastamouse.me-old_blog/images/dinvoke/GetProcAddress.png"/> 
 </figure>
 
 <p>API Monitor restores execution flow, but an EDR would obviously not be that considerate.  Some EDRs may outright block access to these APIs, or at least will be able to inspect the calls (and even see the shellcode) before making some sort of decision for blocking.  So let&rsquo;s replace P/Invoke for D/Invoke - the process is not as hard as you expect.</p>
@@ -205,12 +205,12 @@
 <span class="p">}</span>
 </code></pre></div><p>As we can see - with the same hooks in place, API Monitor no longer sees our API calls and we still get our Beacon.</p>
 <figure>
-    <img src="/images/dinvoke/Beacon.png"/> 
+    <img src="/rastamouse.me-old_blog/images/dinvoke/Beacon.png"/> 
 </figure>
 
 <p>We also don&rsquo;t see the same calls to <code>GetProcAddress</code> to get the addresses of those functions.</p>
 <figure>
-    <img src="/images/dinvoke/FindNotFound.png"/> 
+    <img src="/rastamouse.me-old_blog/images/dinvoke/FindNotFound.png"/> 
 </figure>
 
 <h1 id="conclusion">Conclusion</h1>
@@ -222,7 +222,7 @@
     <div class="nav-next-prev">
         <div class="nav-prev">
             
-                <a href="https://rastamouse.me/blog/sharpc2/"><i class="fas fa-chevron-left"></i></a>
+                <a href="/rastamouse.me-old_blog/blog/sharpc2/"><i class="fas fa-chevron-left"></i></a>
             
         </div>
         <a class="nav-top" href="#">top</i></a>
@@ -243,5 +243,5 @@
 </div>
 </footer></main>
     </body>
-    <script src=https://rastamouse.me/js/navbutton.js></script>
+    <script src=/rastamouse.me-old_blog/js/navbutton.js></script>
 </html>

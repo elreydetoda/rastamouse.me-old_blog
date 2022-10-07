@@ -5,14 +5,14 @@
     <meta name="description" content="Offensive Security Engineering &amp; Shenanigans">
     <meta name="Author" content="Rasta Mouse">
     <meta name="keywords" content="offensive security red team pentesting">
-    <link rel="stylesheet" href=https://rastamouse.me/css/syntax.css>
-    <link rel="stylesheet" href=https://rastamouse.me/css/style.css>
+    <link rel="stylesheet" href=/rastamouse.me-old_blog/css/syntax.css>
+    <link rel="stylesheet" href=/rastamouse.me-old_blog/css/style.css>
     <script src="https://kit.fontawesome.com/1b7478c139.js" crossorigin="anonymous"></script>
     <title>Cheesy Rumbles</title>
   </head><body><aside id="sidenav">
     <header>
     
-        <a href=https://rastamouse.me><img src="https://rastamouse.me/avatar.png" alt="avatar"></a>
+        <a href=https://rastamouse.me><img src="/rastamouse.me-old_blog/avatar.png" alt="avatar"></a>
         
     
 
@@ -26,7 +26,7 @@
     <nav>
         
             		
-            <a href="/"
+            <a href="/rastamouse.me-old_blog/"
                 
             >
                 <i class="fas fa-home fa-sm"></i>
@@ -34,7 +34,7 @@
             </a>
         
             		
-            <a href="/blog/"
+            <a href="/rastamouse.me-old_blog/blog/"
                 
             >
                 <i class="fas fa-keyboard fa-ms"></i>
@@ -42,7 +42,7 @@
             </a>
         
             		
-            <a href="/tags"
+            <a href="/rastamouse.me-old_blog/tags"
                 
             >
                 <i class="fas fa-tags fa-ms"></i>
@@ -70,7 +70,7 @@
             </a>
         
             		
-            <a href="/index.xml"
+            <a href="/rastamouse.me-old_blog/index.xml"
                 
             >
                 <i class="fas fa-rss fa-ms"></i>
@@ -129,7 +129,7 @@
 <p>Implementing External C2 is no trivial task (much more so than slapping a Malleable C2 Profile together).</p>
 <p>The following diagram is the External C2 architecture taken from the <a href="https://www.cobaltstrike.com/downloads/externalc2spec.pdf">External C2 Spec</a>.</p>
 <figure>
-    <img src="/images/c3-first-look/ec2-arch.png"/> 
+    <img src="/rastamouse.me-old_blog/images/c3-first-look/ec2-arch.png"/> 
 </figure>
 
 <p>The boxes in yellow (Team Server &amp; SMB Beacon) are the native Cobalt Strike components, whilst those in green (Third-Party Controller &amp; Third-Party Client) are the &ldquo;3rd party applications&rdquo; that an operator must develop to leverage External C2.  As you can see, they act as a &ldquo;man-in-the-middle&rdquo; between a Beacon and Team Server, effectively relaying traffic between them over the custom C2 channel.</p>
@@ -138,7 +138,7 @@
 <h2 id="lab-setup">Lab Setup</h2>
 <p>C3 already provides some custom C2 channels that we can use straight out of the box - so I decided to try the Slack and Fileshare channels.  I built a contrived lab to demonstrate.</p>
 <figure>
-    <img src="/images/c3-first-look/lab-arch.png"/> 
+    <img src="/rastamouse.me-old_blog/images/c3-first-look/lab-arch.png"/> 
 </figure>
 
 <p>Client 1 and Client 2 are workstations on the same domain, but they cannot communicate with each other (so no SMB/TCP Beacons).  Client 1 will run the Slack egress C2 and Client 2 will run the Fileshare C2.  Channels can be linked - so the Client 2 Fileshare C2 will link to the Client 1 Slack C2.</p>
@@ -157,7 +157,7 @@ Copyright (C) Microsoft Corporation. All rights reserved.
 </code></pre><p>Open Visual Studio and build the <code>GatewayConsoleExe</code>, <code>NodeRelayConsoleExe</code> and <code>NodeRelayDll</code> projects, by simply right-clicking and selecting <code>Build</code>.  These should also be written to <code>D:\Tools\C3\Bin</code>.  Now copy the whole <code>Bin</code> directory to <code>C:\C3</code> on the C3 Server.</p>
 <p>Your folder structure should look like this:</p>
 <figure>
-    <img src="/images/c3-first-look/explorer.png"/> 
+    <img src="/rastamouse.me-old_blog/images/c3-first-look/explorer.png"/> 
 </figure>
 
 <p>Go to <code>C:\C3\Bin\WebController\Release\netcoreapp2.2\publish</code> and open <code>appsettings.json</code>.  Change <code>payloadTemplateDir</code> to <code>../../../..</code>  (which drops it in to <code>C:\C3\Bin</code>).</p>
@@ -175,13 +175,13 @@ Now listening on: http://192.168.1.147:8080
 Application started. Press Ctrl+C to shut down.
 </code></pre></div><p>Browsing to that IP:Port should show the C3 Dashboard.</p>
 <figure>
-    <img src="/images/c3-first-look/gateway.png"/> 
+    <img src="/rastamouse.me-old_blog/images/c3-first-look/gateway.png"/> 
 </figure>
 
 <p>I had to click <code>Edit Config</code> and input <code>http://192.168.1.147</code> and <code>8080</code> in the respective boxes.  Clicking <code>Save Config</code> doesn&rsquo;t seem to update/refresh the page.  So spam-click <code>Save</code> a few times and close the window.  Then click <code>Create and Download Gateway</code> and a ZIP file should download.</p>
 <p>Copy this to the Gateway server, unzip and run the binary.  All being well the GatewayConsole should connect to the WebController API and and C3 Dashboard should refresh.</p>
 <figure>
-    <img src="/images/c3-first-look/gateway-running.png"/> 
+    <img src="/rastamouse.me-old_blog/images/c3-first-look/gateway-running.png"/> 
 </figure>
 
 <h3 id="link-gateway-to-team-server">Link Gateway to Team Server</h3>
@@ -212,21 +212,21 @@ channels:history
 channels:read
 channels:write
 </code></pre><figure>
-    <img src="/images/c3-first-look/slackapp.png"/> 
+    <img src="/rastamouse.me-old_blog/images/c3-first-look/slackapp.png"/> 
 </figure>
 
 <p>Once the App is added to the Workspace you can grab the OAuth Access Token (beginning with <code>xoxp</code>).</p>
 <figure>
-    <img src="/images/c3-first-look/oauth.png"/> 
+    <img src="/rastamouse.me-old_blog/images/c3-first-look/oauth.png"/> 
 </figure>
 
 <p>Back in the C3 Dashboard, double-click the Gateway &gt; <code>Command Center &gt; AddChannelSlack</code> and paste the OAuth token.  I was happy to leave the channel name as it&rsquo;s default random name.  Then click <code>Send Command</code>.</p>
 <figure>
-    <img src="/images/c3-first-look/addchannelslack.png"/> 
+    <img src="/rastamouse.me-old_blog/images/c3-first-look/addchannelslack.png"/> 
 </figure>
 
 <figure>
-    <img src="/images/c3-first-look/slackchanneladded.png"/> 
+    <img src="/rastamouse.me-old_blog/images/c3-first-look/slackchanneladded.png"/> 
 </figure>
 
 <p>You should see the new interface appear in the C3 Dashboard.  Any error messges will display themselves in the Gateway Console running on the C3 Server - which is a good place to look for troubleshooting issues.</p>
@@ -235,48 +235,48 @@ channels:write
 <p>Double-click on the Slack Channel Interface, hover over <code>Interface Options</code> and select <code>New Relay</code>.  All the relevant information for the Slack channel is pre-populated.  We can opt to download the Relay as an <code>exe</code> or <code>dll</code> - which one you want will entirely depend (in the real world) on how you want to get this running on a compromised host.</p>
 <p>From what I&rsquo;ve seen: the exe can be run as a normal executable or as a Windows Service; and the DLL with <code>rundll32 Relay.dll,StartNodeRelay</code>.</p>
 <figure>
-    <img src="/images/c3-first-look/relaysetup.png"/> 
+    <img src="/rastamouse.me-old_blog/images/c3-first-look/relaysetup.png"/> 
 </figure>
 
 <p>Once the Relay has been downloaded and run on the target machine, a new Relay will appear in the C3 Dashboard.</p>
 <figure>
-    <img src="/images/c3-first-look/newrelay.png"/> 
+    <img src="/rastamouse.me-old_blog/images/c3-first-look/newrelay.png"/> 
 </figure>
 
 <p>Double-click it to see some metadata about the machine it&rsquo;s running on.</p>
 <figure>
-    <img src="/images/c3-first-look/relaymetadata.png"/> 
+    <img src="/rastamouse.me-old_blog/images/c3-first-look/relaymetadata.png"/> 
 </figure>
 
 <h2 id="beacon">Beacon</h2>
 <p>To get this Relay to stage a Beacon payload, click <code>Command Center &gt; AddPeripheralBeacon &gt; Send Command</code>.</p>
 <figure>
-    <img src="/images/c3-first-look/client1-beacon.png"/> 
+    <img src="/rastamouse.me-old_blog/images/c3-first-look/client1-beacon.png"/> 
 </figure>
 
 <p>If you have Slack notifications enabled, you will see messages being written and removed from the channel, both during the staging process and every time you issue a command in CS.  The C3 Dashboard will also update to show a new Beacon node.</p>
 <figure>
-    <img src="/images/c3-first-look/beaconnode.png"/> 
+    <img src="/rastamouse.me-old_blog/images/c3-first-look/beaconnode.png"/> 
 </figure>
 
 <h2 id="negotiationchanneluncsharefile">NegotiationChannelUncShareFile</h2>
 <p>Now add the Fileshare C2 channel to our existing relay.  Double-click the Slack relay &gt; <code>Command Center &gt; AddNegotiationChannelUncShareFile</code>.  The file share I&rsquo;ve setup is at <code>\\dc1\demo</code>.  For this to work correctly, the fileshare relay will drop files into the share; and the slack relay will read those files and &ldquo;relay&rdquo; (d&rsquo;uh) the data to the Gateway.  However, the slack relay also needs to be able to delete the files been written by the fileshare relay.  On a share with default inheritance, this can&rsquo;t work since <code>User A</code>, doesn&rsquo;t have permission to remove files created by <code>User B</code>.</p>
 <p>This was <a href="https://github.com/mwrlabs/C3/commit/26be33078f7d447dee1065fe5643759ace37d011">fixed in an update</a>, by making the fileshare relay explicity set the DACL on the files its creating so other users&rsquo; can remove them.</p>
 <figure>
-    <img src="/images/c3-first-look/addnegotiationchanneluncshare.png"/> 
+    <img src="/rastamouse.me-old_blog/images/c3-first-look/addnegotiationchanneluncshare.png"/> 
 </figure>
 
 <figure>
-    <img src="/images/c3-first-look/uncchannel.png"/> 
+    <img src="/rastamouse.me-old_blog/images/c3-first-look/uncchannel.png"/> 
 </figure>
 
 <p>Now just download the Relay for this new channel in the same way (Double-click &gt; <code>Interface Options &gt; New Relay</code>, and finally stage a new beacon as well.</p>
 <figure>
-    <img src="/images/c3-first-look/uncrelay.png"/> 
+    <img src="/rastamouse.me-old_blog/images/c3-first-look/uncrelay.png"/> 
 </figure>
 
 <figure>
-    <img src="/images/c3-first-look/client2-beacon.png"/> 
+    <img src="/rastamouse.me-old_blog/images/c3-first-look/client2-beacon.png"/> 
 </figure>
 
 <h2 id="closing-thoughts">Closing Thoughts</h2>
@@ -290,13 +290,13 @@ channels:write
     <div class="nav-next-prev">
         <div class="nav-prev">
             
-                <a href="https://rastamouse.me/blog/tikiservice/"><i class="fas fa-chevron-left"></i></a>
+                <a href="/rastamouse.me-old_blog/blog/tikiservice/"><i class="fas fa-chevron-left"></i></a>
             
         </div>
         <a class="nav-top" href="#">top</i></a>
         <div class="nav-next">
             
-                <a href="https://rastamouse.me/blog/covenant-tasks-101/"><i class="fas fa-chevron-right"></i></a>
+                <a href="/rastamouse.me-old_blog/blog/covenant-tasks-101/"><i class="fas fa-chevron-right"></i></a>
             
         </div>
     </div>
@@ -311,5 +311,5 @@ channels:write
 </div>
 </footer></main>
     </body>
-    <script src=https://rastamouse.me/js/navbutton.js></script>
+    <script src=/rastamouse.me-old_blog/js/navbutton.js></script>
 </html>

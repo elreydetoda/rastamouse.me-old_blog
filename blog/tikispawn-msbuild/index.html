@@ -5,14 +5,14 @@
     <meta name="description" content="Offensive Security Engineering &amp; Shenanigans">
     <meta name="Author" content="Rasta Mouse">
     <meta name="keywords" content="offensive security red team pentesting">
-    <link rel="stylesheet" href=https://rastamouse.me/css/syntax.css>
-    <link rel="stylesheet" href=https://rastamouse.me/css/style.css>
+    <link rel="stylesheet" href=/rastamouse.me-old_blog/css/syntax.css>
+    <link rel="stylesheet" href=/rastamouse.me-old_blog/css/style.css>
     <script src="https://kit.fontawesome.com/1b7478c139.js" crossorigin="anonymous"></script>
     <title>Cheesy Rumbles</title>
   </head><body><aside id="sidenav">
     <header>
     
-        <a href=https://rastamouse.me><img src="https://rastamouse.me/avatar.png" alt="avatar"></a>
+        <a href=https://rastamouse.me><img src="/rastamouse.me-old_blog/avatar.png" alt="avatar"></a>
         
     
 
@@ -26,7 +26,7 @@
     <nav>
         
             		
-            <a href="/"
+            <a href="/rastamouse.me-old_blog/"
                 
             >
                 <i class="fas fa-home fa-sm"></i>
@@ -34,7 +34,7 @@
             </a>
         
             		
-            <a href="/blog/"
+            <a href="/rastamouse.me-old_blog/blog/"
                 
             >
                 <i class="fas fa-keyboard fa-ms"></i>
@@ -42,7 +42,7 @@
             </a>
         
             		
-            <a href="/tags"
+            <a href="/rastamouse.me-old_blog/tags"
                 
             >
                 <i class="fas fa-tags fa-ms"></i>
@@ -70,7 +70,7 @@
             </a>
         
             		
-            <a href="/index.xml"
+            <a href="/rastamouse.me-old_blog/index.xml"
                 
             >
                 <i class="fas fa-rss fa-ms"></i>
@@ -144,17 +144,17 @@
 <span class="nt">&lt;/Project&gt;</span>
 </code></pre></div><p>Running MSBuild provides the expected output.</p>
 <figure>
-    <img src="/images/msbuild/template.png"/> 
+    <img src="/rastamouse.me-old_blog/images/msbuild/template.png"/> 
 </figure>
 
 <p>The main modification to the TikiSpawn source code is to make the <code>Flame()</code> function a <code>public static</code>.</p>
 <figure>
-    <img src="/images/msbuild/tikispawn.png"/> 
+    <img src="/rastamouse.me-old_blog/images/msbuild/tikispawn.png"/> 
 </figure>
 
 <p>For <code>shellcode.txt</code>, I use Cobalt Strike&rsquo;s stageless raw payload and run it through <a href="https://github.com/rasta-mouse/TikiTorch/blob/master/Get-CompressedShellcode.ps1">Get-CompressedShellcode.ps1</a>.</p>
 <figure>
-    <img src="/images/msbuild/getcompressedshellcode.png"/> 
+    <img src="/rastamouse.me-old_blog/images/msbuild/getcompressedshellcode.png"/> 
 </figure>
 
 <p>Now base64 encode the TikiSpawn DLL and put it into the XML template along with the reflection code.</p>
@@ -205,11 +205,11 @@
   <span class="nt">&lt;/UsingTask&gt;</span>
 <span class="nt">&lt;/Project&gt;</span>
 </code></pre></div><p><figure>
-    <img src="/images/msbuild/tikixml.png"/> 
+    <img src="/rastamouse.me-old_blog/images/msbuild/tikixml.png"/> 
 </figure>
 
 <figure>
-    <img src="/images/msbuild/beacon.png"/> 
+    <img src="/rastamouse.me-old_blog/images/msbuild/beacon.png"/> 
 </figure>
 </p>
 <h3 id="closing">Closing</h3>
@@ -218,13 +218,13 @@
     <div class="nav-next-prev">
         <div class="nav-prev">
             
-                <a href="https://rastamouse.me/blog/collector-service/"><i class="fas fa-chevron-left"></i></a>
+                <a href="/rastamouse.me-old_blog/blog/collector-service/"><i class="fas fa-chevron-left"></i></a>
             
         </div>
         <a class="nav-top" href="#">top</i></a>
         <div class="nav-next">
             
-                <a href="https://rastamouse.me/blog/tikivader/"><i class="fas fa-chevron-right"></i></a>
+                <a href="/rastamouse.me-old_blog/blog/tikivader/"><i class="fas fa-chevron-right"></i></a>
             
         </div>
     </div>
@@ -239,5 +239,5 @@
 </div>
 </footer></main>
     </body>
-    <script src=https://rastamouse.me/js/navbutton.js></script>
+    <script src=/rastamouse.me-old_blog/js/navbutton.js></script>
 </html>

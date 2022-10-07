@@ -5,14 +5,14 @@
     <meta name="description" content="Offensive Security Engineering &amp; Shenanigans">
     <meta name="Author" content="Rasta Mouse">
     <meta name="keywords" content="offensive security red team pentesting">
-    <link rel="stylesheet" href=https://rastamouse.me/css/syntax.css>
-    <link rel="stylesheet" href=https://rastamouse.me/css/style.css>
+    <link rel="stylesheet" href=/rastamouse.me-old_blog/css/syntax.css>
+    <link rel="stylesheet" href=/rastamouse.me-old_blog/css/style.css>
     <script src="https://kit.fontawesome.com/1b7478c139.js" crossorigin="anonymous"></script>
     <title>Cheesy Rumbles</title>
   </head><body><aside id="sidenav">
     <header>
     
-        <a href=https://rastamouse.me><img src="https://rastamouse.me/avatar.png" alt="avatar"></a>
+        <a href=https://rastamouse.me><img src="/rastamouse.me-old_blog/avatar.png" alt="avatar"></a>
         
     
 
@@ -26,7 +26,7 @@
     <nav>
         
             		
-            <a href="/"
+            <a href="/rastamouse.me-old_blog/"
                 
             >
                 <i class="fas fa-home fa-sm"></i>
@@ -34,7 +34,7 @@
             </a>
         
             		
-            <a href="/blog/"
+            <a href="/rastamouse.me-old_blog/blog/"
                 
             >
                 <i class="fas fa-keyboard fa-ms"></i>
@@ -42,7 +42,7 @@
             </a>
         
             		
-            <a href="/tags"
+            <a href="/rastamouse.me-old_blog/tags"
                 
             >
                 <i class="fas fa-tags fa-ms"></i>
@@ -70,7 +70,7 @@
             </a>
         
             		
-            <a href="/index.xml"
+            <a href="/rastamouse.me-old_blog/index.xml"
                 
             >
                 <i class="fas fa-rss fa-ms"></i>
@@ -97,7 +97,7 @@
     <p>Covenant <a href="https://github.com/cobbr/Covenant/commit/bde0df315f26b01a4ef5c5c00679b1e150998a35">v0.1</a> was first released in February 2019 and has since received a lot of really good updates.  <a href="https://github.com/cobbr/Covenant/commit/a2df643e01aea3ad7330bdba88ddd560692e46b4">v0.2</a> was released in May which added p2p comms over SMB named pipes, and <a href="https://github.com/cobbr/Covenant/commit/abcba78006c29b687f6e1a43a1ea1793784714fd">v0.3</a> was released in August which added a brand new web interface.  Even though it&rsquo;s such a young project, it has really proven itself to be a capable tool for offensive operators.  I&rsquo;ve not taken a look at Covenant since v0.1.x but since providing some new <a href="https://github.com/cobbr/SharpSploit/blob/master/SharpSploit/Persistence/WMI.cs">additions</a> to SharpSploit, it kinda got my geek going.  One of my areas of interest is weaponising the Grunt stager.</p>
 <p>At the time of writing, Covenant has 9 Launchers.</p>
 <figure>
-    <img src="/images/covenant-payloads/launchers.png"/> 
+    <img src="/rastamouse.me-old_blog/images/covenant-payloads/launchers.png"/> 
 </figure>
 
 <p>The reason these exist is fairly obvious if you&rsquo;ve been working with C# tooling for any length of time.  The <a href="https://github.com/cobbr/Covenant/blob/master/Covenant/Data/Grunt/GruntHTTP/GruntHTTPStager.cs">Grunt Stager</a> is a C# application that compiles to a .NET Framework binary.  These Launchers represent several methods that we&rsquo;ve become accustomed to using, to execute C#/.NET tooling in &ldquo;interesting&rdquo; ways.</p>
@@ -118,11 +118,11 @@
 <p>Now we can run it, providing a process to inject into and the PPID to spoof.  In this example, we&rsquo;re using <code>iexplore.exe</code> PPID&rsquo;d to Explorer.</p>
 <p><code>C:\Users\user1\Desktop&gt;GruntInjector.exe &quot;C:\Program Files\Internet Explorer\iexplore.exe&quot; 4084</code></p>
 <p><figure>
-    <img src="/images/covenant-payloads/grunt_iexplore.png"/> 
+    <img src="/rastamouse.me-old_blog/images/covenant-payloads/grunt_iexplore.png"/> 
 </figure>
 
 <figure>
-    <img src="/images/covenant-payloads/iexplore_process-hacker.png"/> 
+    <img src="/rastamouse.me-old_blog/images/covenant-payloads/iexplore_process-hacker.png"/> 
 </figure>
 </p>
 <hr>
@@ -178,18 +178,18 @@ False  v4.0.30319
 
 PS C:\Users\user1&gt; [TikiSpawn]::Flame()
 </code></pre><p><figure>
-    <img src="/images/covenant-payloads/grunt_iexplore_tikispawn.png"/> 
+    <img src="/rastamouse.me-old_blog/images/covenant-payloads/grunt_iexplore_tikispawn.png"/> 
 </figure>
 
 <figure>
-    <img src="/images/covenant-payloads/iexplore_process-hacker_tikispawn.png"/> 
+    <img src="/rastamouse.me-old_blog/images/covenant-payloads/iexplore_process-hacker_tikispawn.png"/> 
 </figure>
 </p>
 <hr>
 <h2 id="conclusion">Conclusion</h2>
 <p>What I&rsquo;ve shown here is not meant to replace any of the existing Launchers, but the techniques can lend extra flexibility when staging Grunts.  For example, the default PowerShell Launcher stages a Grunt in <code>powershell.exe</code> with the following process tree.</p>
 <figure>
-    <img src="/images/covenant-payloads/default_powershell_launcher.png"/> 
+    <img src="/rastamouse.me-old_blog/images/covenant-payloads/default_powershell_launcher.png"/> 
 </figure>
 
 <p>Where, as we&rsquo;ve seen above, process injection techniques with PIC allows us to be more opsec-safe (in some areas).  And if donut (or something like it) were to be integrated into Covenant, we&rsquo;d be able to easily make additional post-exploitation Tasks such as injecting Grunts into other users&rsquo; process, and more opsec-safe lateral movement.</p>
@@ -197,13 +197,13 @@ PS C:\Users\user1&gt; [TikiSpawn]::Flame()
     <div class="nav-next-prev">
         <div class="nav-prev">
             
-                <a href="https://rastamouse.me/blog/tikigressor/"><i class="fas fa-chevron-left"></i></a>
+                <a href="/rastamouse.me-old_blog/blog/tikigressor/"><i class="fas fa-chevron-left"></i></a>
             
         </div>
         <a class="nav-top" href="#">top</i></a>
         <div class="nav-next">
             
-                <a href="https://rastamouse.me/blog/tikiservice/"><i class="fas fa-chevron-right"></i></a>
+                <a href="/rastamouse.me-old_blog/blog/tikiservice/"><i class="fas fa-chevron-right"></i></a>
             
         </div>
     </div>
@@ -218,5 +218,5 @@ PS C:\Users\user1&gt; [TikiSpawn]::Flame()
 </div>
 </footer></main>
     </body>
-    <script src=https://rastamouse.me/js/navbutton.js></script>
+    <script src=/rastamouse.me-old_blog/js/navbutton.js></script>
 </html>

@@ -5,14 +5,14 @@
     <meta name="description" content="Offensive Security Engineering &amp; Shenanigans">
     <meta name="Author" content="Rasta Mouse">
     <meta name="keywords" content="offensive security red team pentesting">
-    <link rel="stylesheet" href=https://rastamouse.me/css/syntax.css>
-    <link rel="stylesheet" href=https://rastamouse.me/css/style.css>
+    <link rel="stylesheet" href=/rastamouse.me-old_blog/css/syntax.css>
+    <link rel="stylesheet" href=/rastamouse.me-old_blog/css/style.css>
     <script src="https://kit.fontawesome.com/1b7478c139.js" crossorigin="anonymous"></script>
     <title>Cheesy Rumbles</title>
   </head><body><aside id="sidenav">
     <header>
     
-        <a href=https://rastamouse.me><img src="https://rastamouse.me/avatar.png" alt="avatar"></a>
+        <a href=https://rastamouse.me><img src="/rastamouse.me-old_blog/avatar.png" alt="avatar"></a>
         
     
 
@@ -26,7 +26,7 @@
     <nav>
         
             		
-            <a href="/"
+            <a href="/rastamouse.me-old_blog/"
                 
             >
                 <i class="fas fa-home fa-sm"></i>
@@ -34,7 +34,7 @@
             </a>
         
             		
-            <a href="/blog/"
+            <a href="/rastamouse.me-old_blog/blog/"
                 
             >
                 <i class="fas fa-keyboard fa-ms"></i>
@@ -42,7 +42,7 @@
             </a>
         
             		
-            <a href="/tags"
+            <a href="/rastamouse.me-old_blog/tags"
                 
             >
                 <i class="fas fa-tags fa-ms"></i>
@@ -70,7 +70,7 @@
             </a>
         
             		
-            <a href="/index.xml"
+            <a href="/rastamouse.me-old_blog/index.xml"
                 
             >
                 <i class="fas fa-rss fa-ms"></i>
@@ -95,28 +95,28 @@
 </blockquote>
 <p>We upload and run <code>Seatbelt.exe</code> but never get any output :(  Maybe we even run it a few times just to make sure&hellip;</p>
 <figure>
-    <img src="/images/dotnet/run-seatbelt.png"/> 
+    <img src="/rastamouse.me-old_blog/images/dotnet/run-seatbelt.png"/> 
 </figure>
 
 <p>What we&rsquo;ve not realised is that the following windows have been popping up on the users&rsquo; desktop!</p>
 <figure>
-    <img src="/images/dotnet/dotnet-35.png"/> 
+    <img src="/rastamouse.me-old_blog/images/dotnet/dotnet-35.png"/> 
 </figure>
 
 <p>This is obviously a bit of an opsec fail, so how do we fix it?</p>
 <p>The problem is that we&rsquo;ve compiled Seatbelt with a target framework that is not available on the host.  So all we really need to do it retarget the solution and re-compile.  In Visual Studio, go to <code>Project &gt; Seatbelt Properties</code> and in the <code>Application</code> tab, we&rsquo;ll see the default <code>Target framework</code> set to <code>.NET Framework 3.5</code>.</p>
 <figure>
-    <img src="/images/dotnet/seatbelt-default-dotnet-version.png"/> 
+    <img src="/rastamouse.me-old_blog/images/dotnet/seatbelt-default-dotnet-version.png"/> 
 </figure>
 
 <p>There are numerous ways to check which .NET Framework versions are installed.  Here&rsquo;s one method:</p>
 <figure>
-    <img src="/images/dotnet/dotnet-version.png"/> 
+    <img src="/rastamouse.me-old_blog/images/dotnet/dotnet-version.png"/> 
 </figure>
 
 <p>After re-targetting the solution to <code>.NET Framework 4.6</code>, everything runs as expected and the user gets no prompts.</p>
 <figure>
-    <img src="/images/dotnet/dotnet-46.png"/> 
+    <img src="/rastamouse.me-old_blog/images/dotnet/dotnet-46.png"/> 
 </figure>
 
 <p>Moral of the story is to always check which .NET version is installed before running tools that leverage the framework.  <a href="https://en.wikipedia.org/wiki/.NET_Framework_version_history#Overview">This</a> is also handy as a quick reference to see which versions are default on different versions of Windows.</p>
@@ -124,13 +124,13 @@
     <div class="nav-next-prev">
         <div class="nav-prev">
             
-                <a href="https://rastamouse.me/blog/applocker/"><i class="fas fa-chevron-left"></i></a>
+                <a href="/rastamouse.me-old_blog/blog/applocker/"><i class="fas fa-chevron-left"></i></a>
             
         </div>
         <a class="nav-top" href="#">top</i></a>
         <div class="nav-next">
             
-                <a href="https://rastamouse.me/blog/asb-bypass-pt2/"><i class="fas fa-chevron-right"></i></a>
+                <a href="/rastamouse.me-old_blog/blog/asb-bypass-pt2/"><i class="fas fa-chevron-right"></i></a>
             
         </div>
     </div>
@@ -145,5 +145,5 @@
 </div>
 </footer></main>
     </body>
-    <script src=https://rastamouse.me/js/navbutton.js></script>
+    <script src=/rastamouse.me-old_blog/js/navbutton.js></script>
 </html>

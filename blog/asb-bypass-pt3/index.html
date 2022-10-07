@@ -5,14 +5,14 @@
     <meta name="description" content="Offensive Security Engineering &amp; Shenanigans">
     <meta name="Author" content="Rasta Mouse">
     <meta name="keywords" content="offensive security red team pentesting">
-    <link rel="stylesheet" href=https://rastamouse.me/css/syntax.css>
-    <link rel="stylesheet" href=https://rastamouse.me/css/style.css>
+    <link rel="stylesheet" href=/rastamouse.me-old_blog/css/syntax.css>
+    <link rel="stylesheet" href=/rastamouse.me-old_blog/css/style.css>
     <script src="https://kit.fontawesome.com/1b7478c139.js" crossorigin="anonymous"></script>
     <title>Cheesy Rumbles</title>
   </head><body><aside id="sidenav">
     <header>
     
-        <a href=https://rastamouse.me><img src="https://rastamouse.me/avatar.png" alt="avatar"></a>
+        <a href=https://rastamouse.me><img src="/rastamouse.me-old_blog/avatar.png" alt="avatar"></a>
         
     
 
@@ -26,7 +26,7 @@
     <nav>
         
             		
-            <a href="/"
+            <a href="/rastamouse.me-old_blog/"
                 
             >
                 <i class="fas fa-home fa-sm"></i>
@@ -34,7 +34,7 @@
             </a>
         
             		
-            <a href="/blog/"
+            <a href="/rastamouse.me-old_blog/blog/"
                 
             >
                 <i class="fas fa-keyboard fa-ms"></i>
@@ -42,7 +42,7 @@
             </a>
         
             		
-            <a href="/tags"
+            <a href="/rastamouse.me-old_blog/tags"
                 
             >
                 <i class="fas fa-tags fa-ms"></i>
@@ -70,7 +70,7 @@
             </a>
         
             		
-            <a href="/index.xml"
+            <a href="/rastamouse.me-old_blog/index.xml"
                 
             >
                 <i class="fas fa-rss fa-ms"></i>
@@ -92,12 +92,12 @@
     <li><a href="#amsi_result_clean">AMSI_RESULT_CLEAN</a></li>
   </ul>
 </nav>
-    <p>In <a href="/2018/10/amsiscanbuffer-bypass---part-2/">Part 2</a>, we engineered a delivery method for the AmsiScanBuffer Bypass discussed in <a href="/2018/10/amsiscanbuffer-bypass---part-1/">Part 1</a>.  In this post, we&rsquo;ll make some modifications to the bypass itself.</p>
-<p>If you read <a href="/2018/10/amsiscanbuffer-bypass---part-1/">Part 1</a> and the original posts from CyberArk, you will know that the bypass works by patching the AMSI DLL in memory.  But before we make any modifications to the bypass - let&rsquo;s explore that in some additional detail, so we all have a clear baseline understanding.</p>
+    <p>In <a href="/rastamouse.me-old_blog/2018/10/amsiscanbuffer-bypass---part-2/">Part 2</a>, we engineered a delivery method for the AmsiScanBuffer Bypass discussed in <a href="/rastamouse.me-old_blog/2018/10/amsiscanbuffer-bypass---part-1/">Part 1</a>.  In this post, we&rsquo;ll make some modifications to the bypass itself.</p>
+<p>If you read <a href="/rastamouse.me-old_blog/2018/10/amsiscanbuffer-bypass---part-1/">Part 1</a> and the original posts from CyberArk, you will know that the bypass works by patching the AMSI DLL in memory.  But before we make any modifications to the bypass - let&rsquo;s explore that in some additional detail, so we all have a clear baseline understanding.</p>
 <h2 id="bypass-primer">Bypass Primer</h2>
 <p>We can use API Monitor to have a peak at what&rsquo;s going on.</p>
 <figure>
-    <img src="/images/asb-bypass-pt3/apimonitor.png"/> 
+    <img src="/rastamouse.me-old_blog/images/asb-bypass-pt3/apimonitor.png"/> 
 </figure>
 
 <p>To summerise what we&rsquo;re looking at:</p>
@@ -119,31 +119,31 @@
 </code></pre><p>We won&rsquo;t worry about all of this - just the idea that we have a <code>buffer</code> of <code>length</code>, that when scanned, returns a <code>result</code>.  To help visualise the bypass, let&rsquo;s throw PowerShell into a debugger.</p>
 <p>We&rsquo;ll set a breakpoint on the <code>AmsiScanBuffer</code> function and type something into the console.</p>
 <figure>
-    <img src="/images/asb-bypass-pt3/garbage.png"/> 
+    <img src="/rastamouse.me-old_blog/images/asb-bypass-pt3/garbage.png"/> 
 </figure>
 
 <p>We step down to the <code>mov edi, r8d</code> instruction - because we know from CyberArk that <code>r8d</code> contains the <code>length</code> of the <code>buffer</code>. We can also see that in Binary Ninja.</p>
 <figure>
-    <img src="/images/asb-bypass-pt3/binja-buffer-length.png"/> 
+    <img src="/rastamouse.me-old_blog/images/asb-bypass-pt3/binja-buffer-length.png"/> 
 </figure>
 
 <figure>
-    <img src="/images/asb-bypass-pt3/windgb-mov.png"/> 
+    <img src="/rastamouse.me-old_blog/images/asb-bypass-pt3/windgb-mov.png"/> 
 </figure>
 
 <p>After the instruction, both <code>edi</code> and <code>r8d</code> contain <code>2c</code> - which in decimal is <code>44</code>.  Our string <code>&quot;this is some garbage&quot;</code> is <code>22</code> characters, so this checks out (bits and bytes, amirite).  In the context of <code>AmsiScanBuffer</code>, it&rsquo;s saying &ldquo;scan 22 bytes of this buffer&rdquo;.</p>
 <p>The bypass works by slightly patching this instruction - changing <code>mov edi, r8d</code> to <code>xor edi, edi</code>.  Because if you <code>xor</code> two identical values, i.e. the current value of <code>edi</code> (whatever it happens to be) with itself, the result is always <code>0</code>.  So if we run the bypass and look at the instructions again&hellip;</p>
 <figure>
-    <img src="/images/asb-bypass-pt3/powershell-bypass.png"/> 
+    <img src="/rastamouse.me-old_blog/images/asb-bypass-pt3/powershell-bypass.png"/> 
 </figure>
 
 <figure>
-    <img src="/images/asb-bypass-pt3/windgb-xor.png"/> 
+    <img src="/rastamouse.me-old_blog/images/asb-bypass-pt3/windgb-xor.png"/> 
 </figure>
 
 <p><code>edi</code> is now zero - i.e. &ldquo;scan 0 bytes of this buffer&rdquo;.  So if <code>AmsiScanBuffer</code> scans <code>0</code> bytes, it will not actually scan anything at all.</p>
 <h2 id="amsi_result_clean">AMSI_RESULT_CLEAN</h2>
-<p>So the whole reason for this post, is that I was talking to <a href="https://twitter.com/mrgretzky">Kuba Gretzky</a> about the bypass after I&rsquo;d posted my <a href="/2018/10/amsiscanbuffer-bypass---part-1/">Part 1</a>.  He said:</p>
+<p>So the whole reason for this post, is that I was talking to <a href="https://twitter.com/mrgretzky">Kuba Gretzky</a> about the bypass after I&rsquo;d posted my <a href="/rastamouse.me-old_blog/2018/10/amsiscanbuffer-bypass---part-1/">Part 1</a>.  He said:</p>
 <blockquote>
 <p>the risky part with the bypass is that it uses a fixed offset from the start of the function <code>AmsiScanBufferPtr + 0x001b</code>. MS can just slightly modify the <code>AmsiScanBuffer</code> function and the bypass will result in a crash. It would be wiser to do hotpatching at the beginning of the function to return a result that would say that nothing was found.</p>
 </blockquote>
@@ -158,12 +158,12 @@
 </code></pre></div><p>So could we just patch the function so that it always returns <code>AMSI_RESULT_CLEAN</code>?</p>
 <p>Revisiting the <code>AmsiScanBuffer</code> function in Binary Ninja, we can see there are a whole bunch of instructions followed by conditional jumps, but all to the same address: <code>0x180024f5</code>.</p>
 <figure>
-    <img src="/images/asb-bypass-pt3/jumps.png"/> 
+    <img src="/rastamouse.me-old_blog/images/asb-bypass-pt3/jumps.png"/> 
 </figure>
 
 <p>The content of which is a <code>mov eax, 0x80070057</code> instruction, which we guessed meant <code>AMSI_RESULT_CLEAN</code>.</p>
 <figure>
-    <img src="/images/asb-bypass-pt3/amsi_result_clean.png"/> 
+    <img src="/rastamouse.me-old_blog/images/asb-bypass-pt3/amsi_result_clean.png"/> 
 </figure>
 
 <p>The original bypass was:</p>
@@ -179,17 +179,17 @@
 </code></pre></div><p>Where <code>0xB8, 0x57, 0x00, 0x07, 0x80</code> are the (hex) opcodes for <code>mov eax, 0x80070057</code>; and <code>0xC3</code> is a <code>retn</code>.  And notice there is no offset - we are patching the first two instructions in the function.</p>
 <p>Before we carry out this patch, we can verify those first two instructions at the <code>AmsiScanBuffer</code> pointer.</p>
 <figure>
-    <img src="/images/asb-bypass-pt3/asb-prepatch.png"/> 
+    <img src="/rastamouse.me-old_blog/images/asb-bypass-pt3/asb-prepatch.png"/> 
 </figure>
 
 <p>They match what we expect from Binary Ninja.  If we implement our new patch and look again&hellip;</p>
 <figure>
-    <img src="/images/asb-bypass-pt3/asb-patched.png"/> 
+    <img src="/rastamouse.me-old_blog/images/asb-bypass-pt3/asb-patched.png"/> 
 </figure>
 
 <p>The rest of the instructions become a bit munged, but that doesn&rsquo;t matter.  Hopefully we&rsquo;ll just enter <code>AmsiScanBuffer</code>, immediately set <code>eax</code> and <code>return</code>.</p>
 <figure>
-    <img src="/images/asb-bypass-pt3/bypassed.png"/> 
+    <img src="/rastamouse.me-old_blog/images/asb-bypass-pt3/bypassed.png"/> 
 </figure>
 
 <p>Which seems to work just fine.</p>
@@ -198,13 +198,13 @@
     <div class="nav-next-prev">
         <div class="nav-prev">
             
-                <a href="https://rastamouse.me/blog/asb-bypass-pt2/"><i class="fas fa-chevron-left"></i></a>
+                <a href="/rastamouse.me-old_blog/blog/asb-bypass-pt2/"><i class="fas fa-chevron-left"></i></a>
             
         </div>
         <a class="nav-top" href="#">top</i></a>
         <div class="nav-next">
             
-                <a href="https://rastamouse.me/blog/asb-bypass-pt4/"><i class="fas fa-chevron-right"></i></a>
+                <a href="/rastamouse.me-old_blog/blog/asb-bypass-pt4/"><i class="fas fa-chevron-right"></i></a>
             
         </div>
     </div>
@@ -219,5 +219,5 @@
 </div>
 </footer></main>
     </body>
-    <script src=https://rastamouse.me/js/navbutton.js></script>
+    <script src=/rastamouse.me-old_blog/js/navbutton.js></script>
 </html>

@@ -5,14 +5,14 @@
     <meta name="description" content="Offensive Security Engineering &amp; Shenanigans">
     <meta name="Author" content="Rasta Mouse">
     <meta name="keywords" content="offensive security red team pentesting">
-    <link rel="stylesheet" href=https://rastamouse.me/css/syntax.css>
-    <link rel="stylesheet" href=https://rastamouse.me/css/style.css>
+    <link rel="stylesheet" href=/rastamouse.me-old_blog/css/syntax.css>
+    <link rel="stylesheet" href=/rastamouse.me-old_blog/css/style.css>
     <script src="https://kit.fontawesome.com/1b7478c139.js" crossorigin="anonymous"></script>
     <title>Cheesy Rumbles</title>
   </head><body><aside id="sidenav">
     <header>
     
-        <a href=https://rastamouse.me><img src="https://rastamouse.me/avatar.png" alt="avatar"></a>
+        <a href=https://rastamouse.me><img src="/rastamouse.me-old_blog/avatar.png" alt="avatar"></a>
         
     
 
@@ -26,7 +26,7 @@
     <nav>
         
             		
-            <a href="/"
+            <a href="/rastamouse.me-old_blog/"
                 
             >
                 <i class="fas fa-home fa-sm"></i>
@@ -34,7 +34,7 @@
             </a>
         
             		
-            <a href="/blog/"
+            <a href="/rastamouse.me-old_blog/blog/"
                 
             >
                 <i class="fas fa-keyboard fa-ms"></i>
@@ -42,7 +42,7 @@
             </a>
         
             		
-            <a href="/tags"
+            <a href="/rastamouse.me-old_blog/tags"
                 
             >
                 <i class="fas fa-tags fa-ms"></i>
@@ -70,7 +70,7 @@
             </a>
         
             		
-            <a href="/index.xml"
+            <a href="/rastamouse.me-old_blog/index.xml"
                 
             >
                 <i class="fas fa-rss fa-ms"></i>
@@ -116,7 +116,7 @@
 </blockquote>
 <p>The reason for this is apparent if we look at the source code of the Grunt.</p>
 <figure>
-    <img src="/images/cov-tasks-101/gruntsource.png"/> 
+    <img src="/rastamouse.me-old_blog/images/cov-tasks-101/gruntsource.png"/> 
 </figure>
 
 <p>A bare minimum example could be:</p>
@@ -163,11 +163,11 @@
 <p>Tip:  When you make changes to <code>DbInitializer</code>, you should remove <code>Covenant\Covenant\Data\covenant.db</code> before starting Covenant again.</p>
 </blockquote>
 <p><figure>
-    <img src="/images/cov-tasks-101/helloworld-task.png"/> 
+    <img src="/rastamouse.me-old_blog/images/cov-tasks-101/helloworld-task.png"/> 
 </figure>
 
 <figure>
-    <img src="/images/cov-tasks-101/helloworld-grunt.png"/> 
+    <img src="/rastamouse.me-old_blog/images/cov-tasks-101/helloworld-grunt.png"/> 
 </figure>
 </p>
 <h3 id="parameters">Parameters</h3>
@@ -243,11 +243,11 @@
 </ul>
 <p>Executing this task via the Task UI, specifying both inputs produce the expected results.</p>
 <p><figure>
-    <img src="/images/cov-tasks-101/helloworld-tasking.png"/> 
+    <img src="/rastamouse.me-old_blog/images/cov-tasks-101/helloworld-tasking.png"/> 
 </figure>
 
 <figure>
-    <img src="/images/cov-tasks-101/helloworld-interact.png"/> 
+    <img src="/rastamouse.me-old_blog/images/cov-tasks-101/helloworld-interact.png"/> 
 </figure>
 </p>
 <p>Notice how <code>InputTwo</code> does not appear in the Interact UI, because we set <code>DisplayInCommand</code> to <code>false</code>.  This is good for tasks that take long strings such as PowerShell Launchers, so as to not clutter the interface.</p>
@@ -273,7 +273,7 @@
 </code></pre></div><p>Then in <code>DbInitializer</code>, add a new <code>GruntTaskReferenceSourceLibrary</code>:</p>
 <div class="highlight"><pre class="chroma"><code class="language-c#" data-lang="c#"><span class="k">new</span> <span class="n">GruntTaskReferenceSourceLibrary</span> <span class="p">{</span> <span class="n">ReferenceSourceLibrary</span> <span class="p">=</span> <span class="n">ss</span><span class="p">,</span> <span class="n">GruntTask</span> <span class="p">=</span> <span class="k">await</span> <span class="n">context</span><span class="p">.</span><span class="n">GetGruntTaskByName</span><span class="p">(</span><span class="s">&#34;HelloWorld&#34;</span><span class="p">)</span> <span class="p">}</span>
 </code></pre></div><figure>
-    <img src="/images/cov-tasks-101/whoami.png"/> 
+    <img src="/rastamouse.me-old_blog/images/cov-tasks-101/whoami.png"/> 
 </figure>
 
 <p>Adding an additional reference library to the Covenant back-end is more involved and probably doesn&rsquo;t qualify as a &ldquo;101&rdquo;, so I&rsquo;ll stop this post here. For all things Covenant, join the #Covenant channel in the <a href="https://bloodhoundgang.herokuapp.com/">BloodHound Slack</a>.</p>
@@ -281,13 +281,13 @@
     <div class="nav-next-prev">
         <div class="nav-prev">
             
-                <a href="https://rastamouse.me/blog/c3-first-look/"><i class="fas fa-chevron-left"></i></a>
+                <a href="/rastamouse.me-old_blog/blog/c3-first-look/"><i class="fas fa-chevron-left"></i></a>
             
         </div>
         <a class="nav-top" href="#">top</i></a>
         <div class="nav-next">
             
-                <a href="https://rastamouse.me/blog/gadgettojscript/"><i class="fas fa-chevron-right"></i></a>
+                <a href="/rastamouse.me-old_blog/blog/gadgettojscript/"><i class="fas fa-chevron-right"></i></a>
             
         </div>
     </div>
@@ -302,5 +302,5 @@
 </div>
 </footer></main>
     </body>
-    <script src=https://rastamouse.me/js/navbutton.js></script>
+    <script src=/rastamouse.me-old_blog/js/navbutton.js></script>
 </html>

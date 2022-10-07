@@ -5,14 +5,14 @@
     <meta name="description" content="Offensive Security Engineering &amp; Shenanigans">
     <meta name="Author" content="Rasta Mouse">
     <meta name="keywords" content="offensive security red team pentesting">
-    <link rel="stylesheet" href=https://rastamouse.me/css/syntax.css>
-    <link rel="stylesheet" href=https://rastamouse.me/css/style.css>
+    <link rel="stylesheet" href=/rastamouse.me-old_blog/css/syntax.css>
+    <link rel="stylesheet" href=/rastamouse.me-old_blog/css/style.css>
     <script src="https://kit.fontawesome.com/1b7478c139.js" crossorigin="anonymous"></script>
     <title>Cheesy Rumbles</title>
   </head><body><aside id="sidenav">
     <header>
     
-        <a href=https://rastamouse.me><img src="https://rastamouse.me/avatar.png" alt="avatar"></a>
+        <a href=https://rastamouse.me><img src="/rastamouse.me-old_blog/avatar.png" alt="avatar"></a>
         
     
 
@@ -26,7 +26,7 @@
     <nav>
         
             		
-            <a href="/"
+            <a href="/rastamouse.me-old_blog/"
                 
             >
                 <i class="fas fa-home fa-sm"></i>
@@ -34,7 +34,7 @@
             </a>
         
             		
-            <a href="/blog/"
+            <a href="/rastamouse.me-old_blog/blog/"
                 
             >
                 <i class="fas fa-keyboard fa-ms"></i>
@@ -42,7 +42,7 @@
             </a>
         
             		
-            <a href="/tags"
+            <a href="/rastamouse.me-old_blog/tags"
                 
             >
                 <i class="fas fa-tags fa-ms"></i>
@@ -70,7 +70,7 @@
             </a>
         
             		
-            <a href="/index.xml"
+            <a href="/rastamouse.me-old_blog/index.xml"
                 
             >
                 <i class="fas fa-rss fa-ms"></i>
@@ -129,7 +129,7 @@
 <h3 id="create-gpos">Create GPOs</h3>
 <p>In the Group Policy Management Console (GPMC), delegated permission to create GPOs in the domain looks like this:</p>
 <figure>
-    <img src="/images/gpo-abuse-pt1/gpmc-create-gpos.png"/> 
+    <img src="/rastamouse.me-old_blog/images/gpo-abuse-pt1/gpmc-create-gpos.png"/> 
 </figure>
 
 <p>They can be easy to enumerate PowerView with the following:</p>
@@ -193,7 +193,7 @@ objectcategory        : CN=Organizational-Unit,CN=Schema,CN=Configuration,DC=tes
 </code></pre></div><p>The Delegation of Control Wizard in Active Directory Users and Computers (ADUC) has a predefined template for &ldquo;Manage Group Policy links&rdquo;.  It&rsquo;s useful for delegating different types of privilege to principals over particular objects.</p>
 <p>In this example, we delegate this to the <code>LAB\Desktop Admins</code> group.</p>
 <figure>
-    <img src="/images/gpo-abuse-pt1/gp-link.png"/> 
+    <img src="/rastamouse.me-old_blog/images/gpo-abuse-pt1/gp-link.png"/> 
 </figure>
 
 <p>This is also easy to enumerate in PowerView by piping <code>Get-DomainOu</code> into <code>Get-DomainObjectAcl</code> and looking for the <code>GP-Link</code> ACE.</p>
@@ -260,12 +260,12 @@ displayname
 Workstation Policy
 </code></pre></div><p>As seen in the <code>Details</code> tab of GPMC, <code>LAB\bwallace</code> is the <code>owner</code> of this GPO called <code>Workstation Policy</code>.</p>
 <figure>
-    <img src="/images/gpo-abuse-pt1/gpo-owner.png"/> 
+    <img src="/rastamouse.me-old_blog/images/gpo-abuse-pt1/gpo-owner.png"/> 
 </figure>
 
 <p>Creators of a GPO are automatically granted explicit <code>Edit settings, delete, modify security</code>, which manifests as <code>CreateChild, DeleteChild, Self, WriteProperty, DeleteTree, Delete, GenericRead, WriteDacl, WriteOwner</code>.</p>
 <figure>
-    <img src="/images/gpo-abuse-pt1/gpo-delegation.png"/> 
+    <img src="/rastamouse.me-old_blog/images/gpo-abuse-pt1/gpo-delegation.png"/> 
 </figure>
 
 <p>Also in this example, <code>LAB\tlockhart</code> has been granted explicit <code>Edit settings</code>, which are <code>CreateChild, DeleteChild, ReadProperty, WriteProperty, GenericExecute</code>.</p>
@@ -314,14 +314,14 @@ displayname
 Demo GPO
 Workstation Policy
 </code></pre></div><figure>
-    <img src="/images/gpo-abuse-pt1/gpo-by-ou.png"/> 
+    <img src="/rastamouse.me-old_blog/images/gpo-abuse-pt1/gpo-by-ou.png"/> 
 </figure>
 
 <p>The astute amongst you may notice in these examples, how some return GPOs included via inheritance (e.g. the Default Domain Policy) and others do not.</p>
 <h2 id="inheritance">Inheritance</h2>
 <p>I find inheritance pretty interesting, especially when it comes to the Delegation of Control Wizard.  By default, it will enable inheritance for <code>This object and all descending objects</code>.</p>
 <figure>
-    <img src="/images/gpo-abuse-pt1/inheritance-all-desc.png"/> 
+    <img src="/rastamouse.me-old_blog/images/gpo-abuse-pt1/inheritance-all-desc.png"/> 
 </figure>
 
 <div class="highlight"><pre class="chroma"><code class="language-text" data-lang="text">PS &gt; Get-DomainOU | Get-DomainObjectAcl -ResolveGUIDs | Where-Object { $_.ObjectAceType -eq &#34;GP-Link&#34; }
@@ -383,12 +383,12 @@ AceFlags               : None     &lt;---
 InheritedObjectAceType : All
 OpaqueLength           : 0
 </code></pre></div><figure>
-    <img src="/images/gpo-abuse-pt1/inheritance-only.png"/> 
+    <img src="/rastamouse.me-old_blog/images/gpo-abuse-pt1/inheritance-only.png"/> 
 </figure>
 
 <p>Finally, if you have nested children like this:</p>
 <figure>
-    <img src="/images/gpo-abuse-pt1/3-stack.png"/> 
+    <img src="/rastamouse.me-old_blog/images/gpo-abuse-pt1/3-stack.png"/> 
 </figure>
 
 <p>The <code>DA</code> OU will inherit from both <code>Workstations</code> and <code>Admins</code>.  So we have a delegation on <code>Workstations</code> for <code>LAB\Desktop Admins</code> and a delegation on <code>Admins</code> for <code>LAB\Team 2</code> - the <code>DA</code> OU will inherit both.</p>
@@ -487,7 +487,7 @@ AceFlags               : ContainerInherit, Inherited
 InheritedObjectAceType : All
 OpaqueLength           : 0
 </code></pre></div><figure>
-    <img src="/images/gpo-abuse-pt1/da-inheritance.png"/> 
+    <img src="/rastamouse.me-old_blog/images/gpo-abuse-pt1/da-inheritance.png"/> 
 </figure>
 
 <p>I think that&rsquo;s enough enumeration for now!  In the next part, we&rsquo;ll start with some abuses.</p>
@@ -495,13 +495,13 @@ OpaqueLength           : 0
     <div class="nav-next-prev">
         <div class="nav-prev">
             
-                <a href="https://rastamouse.me/blog/asb-bypass-pt4/"><i class="fas fa-chevron-left"></i></a>
+                <a href="/rastamouse.me-old_blog/blog/asb-bypass-pt4/"><i class="fas fa-chevron-left"></i></a>
             
         </div>
         <a class="nav-top" href="#">top</i></a>
         <div class="nav-next">
             
-                <a href="https://rastamouse.me/blog/gpo-abuse-pt2/"><i class="fas fa-chevron-right"></i></a>
+                <a href="/rastamouse.me-old_blog/blog/gpo-abuse-pt2/"><i class="fas fa-chevron-right"></i></a>
             
         </div>
     </div>
@@ -516,5 +516,5 @@ OpaqueLength           : 0
 </div>
 </footer></main>
     </body>
-    <script src=https://rastamouse.me/js/navbutton.js></script>
+    <script src=/rastamouse.me-old_blog/js/navbutton.js></script>
 </html>
